@@ -19,9 +19,9 @@ interface BrandReaderInterface
     /**
      * @param \Generated\Shared\Transfer\ProductAbstractTransfer $productAbstractTransfer
      *
-     * @return \Generated\Shared\Transfer\BrandTransfer
+     * @return \Generated\Shared\Transfer\BrandTransfer|null
      */
-    public function getFirstBrandByProductAbstractId(ProductAbstractTransfer $productAbstractTransfer): BrandTransfer;
+    public function getFirstBrandByProductAbstractId(ProductAbstractTransfer $productAbstractTransfer): ?BrandTransfer;
 
     /**
      * @param \Generated\Shared\Transfer\BrandTransfer $brandTransfer

@@ -44,7 +44,7 @@ class BrandProductRepository extends AbstractRepository implements BrandProductR
      *
      * @return \Generated\Shared\Transfer\BrandTransfer|null
      */
-    public function getFirstBrandByProductAbstractId(int $idProductAbstract): BrandTransfer
+    public function getFirstBrandByProductAbstractId(int $idProductAbstract): ?BrandTransfer
     {
         /** @var \Propel\Runtime\Collection\ObjectCollection|\Orm\Zed\Brand\Persistence\FosBrand[] $brandEntities */
         $brandEntities = $this->getFactory()

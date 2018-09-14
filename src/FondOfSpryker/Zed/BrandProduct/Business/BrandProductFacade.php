@@ -34,4 +34,19 @@ class BrandProductFacade extends AbstractFacade implements BrandProductFacadeInt
             ->createBrandExpander()
             ->expandBrandTransferWithProductAbstractRelations($brandTransfer);
     }
+
+    /**
+     * @param int $idProductAbstract
+     *
+     * @return \Generated\Shared\Transfer\BrandTransfer|null
+     */
+    public function getBrandByProductAbstractId(int $idProductAbstract): ?BrandTransfer
+    {
+        $productAbstractTransfer = new ProductAbstractTransfer();
+        $productAbstractTransfer->setIdProductAbstract($idProductAbstract);
+
+        return $this->getFactory()
+            ->createBrandReader()
+            ->getFirstBrandByProductAbstractId($productAbstractTransfer);
+    }
 }

@@ -30,4 +30,16 @@ interface BrandProductFacadeInterface
      * @return \Generated\Shared\Transfer\BrandTransfer
      */
     public function expandBrandTransferWithProductAbstractRelations(BrandTransfer $brandTransfer): BrandTransfer;
+
+    /**
+     * Specification:
+     * - Find brand by product abstract id
+     *
+     * @api
+     *
+     * @param int $idProductAbstract
+     *
+     * @return \Generated\Shared\Transfer\BrandTransfer|null
+     */
+    public function getBrandByProductAbstractId(int $idProductAbstract): ?BrandTransfer;
 }

@@ -18,9 +18,9 @@ interface BrandProductRepositoryInterface
     /**
      * @param int $idProduct
      *
-     * @return \Generated\Shared\Transfer\BrandTransfer
+     * @return \Generated\Shared\Transfer\BrandTransfer|null
      */
-    public function getFirstBrandByProductAbstractId(int $idProduct): BrandTransfer;
+    public function getFirstBrandByProductAbstractId(int $idProduct): ?BrandTransfer;
 
     /**
      * @param int $idBrand

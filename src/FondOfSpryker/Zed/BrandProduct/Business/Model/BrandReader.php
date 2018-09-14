@@ -40,7 +40,7 @@ class BrandReader implements BrandReaderInterface
      *
      * @return \Generated\Shared\Transfer\BrandTransfer
      */
-    public function getFirstBrandByProductAbstractId(ProductAbstractTransfer $productAbstractTransfer): BrandTransfer
+    public function getFirstBrandByProductAbstractId(ProductAbstractTransfer $productAbstractTransfer): ?BrandTransfer
     {
         $productAbstractTransfer->requireIdProductAbstract();
 
