@@ -8,6 +8,7 @@ use Spryker\Zed\Kernel\Communication\AbstractPlugin;
 
 /**
  * @method \FondOfSpryker\Zed\BrandProduct\Business\BrandProductFacadeInterface getFacade()
+ * @method \FondOfSpryker\Zed\BrandProduct\Communication\BrandProductCommunicationFactory getFactory()
  */
 class BrandTransferExpander extends AbstractPlugin implements BrandTransferExpanderPluginInterface
 {
@@ -16,7 +17,7 @@ class BrandTransferExpander extends AbstractPlugin implements BrandTransferExpan
      *
      * @api
      *
-     * @param \Generated\Shared\Transfer\BrandTransfer $customerTransfer
+     * @param \Generated\Shared\Transfer\BrandTransfer $brandTransfer
      *
      * @return \Generated\Shared\Transfer\BrandTransfer
      */
