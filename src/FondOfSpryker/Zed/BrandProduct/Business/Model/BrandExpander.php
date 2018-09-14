@@ -3,7 +3,6 @@
 namespace FondOfSpryker\Zed\BrandProduct\Business\Model;
 
 use Generated\Shared\Transfer\BrandProductAbstractRelationTransfer;
-use Generated\Shared\Transfer\BrandProductRelationTransfer;
 use Generated\Shared\Transfer\BrandTransfer;
 
 class BrandExpander implements BrandExpanderInterface
@@ -46,10 +45,9 @@ class BrandExpander implements BrandExpanderInterface
      * @return void
      */
     protected function addProductAbstractRelationsToBrandTransfer(
-        BrandTransfer $brandTransfer, BrandProductAbstractRelationTransfer
-        $brandProductAbstractRelationTransfer
-    ): void
-    {
+        BrandTransfer $brandTransfer,
+        BrandProductAbstractRelationTransfer $brandProductAbstractRelationTransfer
+    ): void {
         $brandTransfer->setBrandProductAbstractRelation($brandProductAbstractRelationTransfer);
     }
 }

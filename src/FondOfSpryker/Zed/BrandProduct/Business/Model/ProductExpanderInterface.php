@@ -7,7 +7,7 @@ use Generated\Shared\Transfer\ProductAbstractTransfer;
 interface ProductExpanderInterface
 {
     /**
-     * @param \Generated\Shared\Transfer\ProductAbstractTransfer $customerTransfer
+     * @param \Generated\Shared\Transfer\ProductAbstractTransfer $productAbstractTransfer
      *
      * @return \Generated\Shared\Transfer\ProductAbstractTransfer
      */

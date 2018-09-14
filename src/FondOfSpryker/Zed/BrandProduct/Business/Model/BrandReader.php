@@ -5,7 +5,6 @@ namespace FondOfSpryker\Zed\BrandProduct\Business\Model;
 use FondOfSpryker\Zed\BrandProduct\Persistence\BrandProductRepositoryInterface;
 use Generated\Shared\Transfer\BrandCollectionTransfer;
 use Generated\Shared\Transfer\BrandProductAbstractRelationTransfer;
-use Generated\Shared\Transfer\BrandProductRelationTransfer;
 use Generated\Shared\Transfer\BrandTransfer;
 use Generated\Shared\Transfer\ProductAbstractTransfer;
 
@@ -25,7 +24,7 @@ class BrandReader implements BrandReaderInterface
     }
 
     /**
-     * @param \Generated\Shared\Transfer\ProductAbstractTransfer $productTransfer
+     * @param \Generated\Shared\Transfer\ProductAbstractTransfer $productAbstractTransfer
      *
      * @return \Generated\Shared\Transfer\BrandCollectionTransfer
      */

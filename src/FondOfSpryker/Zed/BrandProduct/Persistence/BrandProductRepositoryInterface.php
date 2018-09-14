@@ -4,7 +4,6 @@ namespace FondOfSpryker\Zed\BrandProduct\Persistence;
 
 use Generated\Shared\Transfer\BrandCollectionTransfer;
 use Generated\Shared\Transfer\BrandProductAbstractRelationTransfer;
-use Generated\Shared\Transfer\BrandProductRelationTransfer;
 use Generated\Shared\Transfer\BrandTransfer;
 
 interface BrandProductRepositoryInterface

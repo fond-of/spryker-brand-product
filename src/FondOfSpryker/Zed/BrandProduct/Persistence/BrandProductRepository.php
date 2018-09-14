@@ -4,7 +4,6 @@ namespace FondOfSpryker\Zed\BrandProduct\Persistence;
 
 use Generated\Shared\Transfer\BrandCollectionTransfer;
 use Generated\Shared\Transfer\BrandProductAbstractRelationTransfer;
-use Generated\Shared\Transfer\BrandProductRelationTransfer;
 use Generated\Shared\Transfer\BrandTransfer;
 use Spryker\Zed\Kernel\Persistence\AbstractRepository;
 
@@ -43,7 +42,7 @@ class BrandProductRepository extends AbstractRepository implements BrandProductR
     /**
      * @param int $idProductAbstract
      *
-     * @return null|\Generated\Shared\Transfer\BrandTransfer
+     * @return \Generated\Shared\Transfer\BrandTransfer|null
      */
     public function getFirstBrandByProductAbstractId(int $idProductAbstract): BrandTransfer
     {
@@ -55,7 +54,6 @@ class BrandProductRepository extends AbstractRepository implements BrandProductR
             ->endUse()
             ->limit(1)
             ->find();
-
 
         if ($brandEntities->isEmpty() === false) {
             $brandProductMapper = $this->getFactory()->createBrandProductMapper();

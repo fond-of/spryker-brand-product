@@ -26,7 +26,7 @@ interface BrandReaderInterface
     /**
      * @param \Generated\Shared\Transfer\BrandTransfer $brandTransfer
      *
-     * @return \Generated\Shared\Transfer\BrandProductRelationTransfer
+     * @return \Generated\Shared\Transfer\BrandProductAbstractRelationTransfer
      */
     public function getProductAbstractCollectionByBrand(BrandTransfer $brandTransfer): BrandProductAbstractRelationTransfer;
 }

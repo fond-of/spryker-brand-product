@@ -21,7 +21,7 @@ class ProductExpander implements ProductExpanderInterface
     }
 
     /**
-     * @param \Generated\Shared\Transfer\ProductAbstractTransfer $productTransfer
+     * @param \Generated\Shared\Transfer\ProductAbstractTransfer $productAbstractTransfer
      *
      * @return \Generated\Shared\Transfer\ProductAbstractTransfer
      */
@@ -37,7 +37,6 @@ class ProductExpander implements ProductExpanderInterface
         if ($brandTransfer !== null) {
             $productAbstractTransfer->setBrand($brandTransfer);
         }
-
 
         return $productAbstractTransfer;
     }
