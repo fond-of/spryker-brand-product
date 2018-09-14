@@ -9,7 +9,7 @@ interface BrandProductFacadeInterface
 {
     /**
      * Specification:
-      * - Expands product abstract transfer with BrandTransfer.
+     * - Expands product abstract transfer with BrandTransfer.
      *
      * @api
      *
