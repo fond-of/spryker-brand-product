@@ -7,8 +7,8 @@
     package="src.Orm.Zed.BrandProduct.Persistence">
 
     <table name="fos_brand_product" isCrossRef="true">
-        <column name="fk_brand" type="integer" primaryKey="true"/>
-        <column name="fk_product_abstract" required="true" type="INTEGER"/>
+        <column name="fk_brand" type="INTEGER" required="true" />
+        <column name="fk_product_abstract" type="INTEGER" required="true" />
 
         <foreign-key name="fos_brand_product-fk_brand" foreignTable="fos_brand" onDelete="CASCADE">
             <reference local="fk_brand" foreign="id_brand"/>
@@ -23,7 +23,7 @@
         </index>
 
         <index name="fos_brand_product-fk_product">
-            <index-column name="fk_product"/>
+            <index-column name="fk_product_abstract"/>
         </index>
 
         <unique name="fos_brand_product-unique-fk_product_abstract">

@@ -1,11 +1,11 @@
 <?php
 
-namespace FondOfSpryker\Zed\BrandCustomer\Persistence\Propel\Mapper;
+namespace FondOfSpryker\Zed\BrandProduct\Persistence\Propel\Mapper;
 
 use Generated\Shared\Transfer\BrandTransfer;
 use Orm\Zed\Brand\Persistence\FosBrand;
 
-class BrandProductMapper implements BrandCustomerMapperInterface
+class BrandProductMapper implements BrandProductMapperInterface
 {
     /**
      * @param \Orm\Zed\Brand\Persistence\FosBrand $fosBrand
