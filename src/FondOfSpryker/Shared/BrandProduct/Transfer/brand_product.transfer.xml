@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<transfers xmlns="spryker:transfer-01"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="spryker:transfer-01 http://static.spryker.com/transfer-01.xsd">
+
+    <transfer name="Brand">
+        <property name="brandProductRelation" type="BrandProductRelation"/>
+    </transfer>
+
+    <transfer name="BrandProductRelation">
+        <property name="idBrand" type="int"/>
+        <property name="productIds" type="int[]"/>
+    </transfer>
+
+    <transfer name="Product">
+        <property name="brandCollection" type="BrandCollection"/>
+    </transfer>
+</transfers>
