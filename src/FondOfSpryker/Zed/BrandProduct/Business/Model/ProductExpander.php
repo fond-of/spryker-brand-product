@@ -2,7 +2,7 @@
 
 namespace FondOfSpryker\Zed\BrandProduct\Business\Model;
 
-use Generated\Shared\Transfer\BrandTransfer;
+use Generated\Shared\Transfer\BrandCollectionTransfer;
 use Generated\Shared\Transfer\ProductAbstractTransfer;
 
 class ProductExpander implements ProductExpanderInterface
@@ -27,15 +27,14 @@ class ProductExpander implements ProductExpanderInterface
      */
     public function expandProductAbstractTransferWithBrand(ProductAbstractTransfer $productAbstractTransfer): ProductAbstractTransfer
     {
-        $productAbstractTransfer->setBrand(new BrandTransfer());
+        $productAbstractTransfer->setBrandCollection(new BrandCollectionTransfer());
 
-        // currenty one product has only one brand!
-        $brandTransfer = $this->brandReader->getFirstBrandByProductAbstractId(
+        $brandCollection = $this->brandReader->getBrandCollectionByIdProductAbstractId(
             $productAbstractTransfer
         );
 
-        if ($brandTransfer !== null) {
-            $productAbstractTransfer->setBrand($brandTransfer);
+        if ($brandCollection->getBrands()->count() > 0) {
+            $productAbstractTransfer->setBrandCollection($brandCollection);
         }
 
         return $productAbstractTransfer;

@@ -2,6 +2,7 @@
 
 namespace FondOfSpryker\Zed\BrandProduct\Business;
 
+use Generated\Shared\Transfer\BrandCollectionTransfer;
 use Generated\Shared\Transfer\BrandTransfer;
 use Generated\Shared\Transfer\ProductAbstractTransfer;
 
@@ -39,7 +40,20 @@ interface BrandProductFacadeInterface
      *
      * @param int $idProductAbstract
      *
-     * @return \Generated\Shared\Transfer\BrandTransfer|null
+     * @return \Generated\Shared\Transfer\BrandCollectionTransfer
      */
-    public function getBrandByProductAbstractId(int $idProductAbstract): ?BrandTransfer;
+    public function getBrandsByProductAbstractId(int $idProductAbstract): BrandCollectionTransfer;
+
+    /**
+     * Specification:
+     * - Persists provided brand to database or delete if not exists anymore for the given abstract product.
+     * - Returns ProductAbstractTransfer along with the data from the persisted BrandTransfer.
+     *
+     * @api
+     *
+     * @param \Generated\Shared\Transfer\ProductAbstractTransfer $productAbstractTransfer
+     *
+     * @return \Generated\Shared\Transfer\ProductAbstractTransfer
+     */
+    public function updateProductAbstractBrands(ProductAbstractTransfer $productAbstractTransfer): ProductAbstractTransfer;
 }

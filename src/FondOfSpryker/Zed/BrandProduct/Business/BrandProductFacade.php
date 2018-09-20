@@ -2,6 +2,7 @@
 
 namespace FondOfSpryker\Zed\BrandProduct\Business;
 
+use Generated\Shared\Transfer\BrandCollectionTransfer;
 use Generated\Shared\Transfer\BrandTransfer;
 use Generated\Shared\Transfer\ProductAbstractTransfer;
 use Spryker\Zed\Kernel\Business\AbstractFacade;
@@ -38,15 +39,33 @@ class BrandProductFacade extends AbstractFacade implements BrandProductFacadeInt
     /**
      * @param int $idProductAbstract
      *
-     * @return \Generated\Shared\Transfer\BrandTransfer|null
+     * @return \Generated\Shared\Transfer\BrandCollectionTransfer
      */
-    public function getBrandByProductAbstractId(int $idProductAbstract): ?BrandTransfer
+    public function getBrandsByProductAbstractId(int $idProductAbstract): BrandCollectionTransfer
     {
         $productAbstractTransfer = new ProductAbstractTransfer();
         $productAbstractTransfer->setIdProductAbstract($idProductAbstract);
 
         return $this->getFactory()
             ->createBrandReader()
-            ->getFirstBrandByProductAbstractId($productAbstractTransfer);
+            ->getBrandCollectionByIdProductAbstractId($productAbstractTransfer);
+    }
+
+    /**
+     * Specification:
+     * - Persists all provided brands to database for the given abstract product.
+     * - Returns ProductAbstractTransfer along with the data from the persisted BrandTransfer.
+     *
+     * @api
+     *
+     * @param \Generated\Shared\Transfer\ProductAbstractTransfer $productAbstractTransfer
+     *
+     * @return \Generated\Shared\Transfer\ProductAbstractTransfer
+     */
+    public function updateProductAbstractBrands(ProductAbstractTransfer $productAbstractTransfer): ProductAbstractTransfer
+    {
+        return $this->getFactory()
+            ->createBrandWriter()
+            ->updateProductAbstractBrands($productAbstractTransfer);
     }
 }

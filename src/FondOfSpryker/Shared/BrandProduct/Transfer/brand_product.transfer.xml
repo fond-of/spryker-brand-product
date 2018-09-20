@@ -13,6 +13,6 @@
     </transfer>
 
     <transfer name="ProductAbstract">
-        <property name="brand" type="Brand"/>
+        <property name="brandCollection" type="BrandCollection"/>
     </transfer>
 </transfers>
