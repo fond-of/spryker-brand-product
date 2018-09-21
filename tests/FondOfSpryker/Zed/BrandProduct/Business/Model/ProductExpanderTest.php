@@ -27,7 +27,7 @@ class ProductExpanderTest extends Unit
     /**
      * @var \Generated\Shared\Transfer\ProductAbstractTransfer
      */
-    protected $productTransfer;
+    protected $productAbstractTransfer;
 
     /**
      * @var \FondOfSpryker\Zed\BrandProduct\Business\Model\ProductExpanderInterface
@@ -41,7 +41,7 @@ class ProductExpanderTest extends Unit
     {
         parent::_before();
 
-        $this->productTransfer = new ProductAbstractTransfer();
+        $this->productAbstractTransfer = new ProductAbstractTransfer();
 
         $this->brandReaderMock = $this->getMockBuilder(BrandReaderInterface::class)
             ->disableOriginalConstructor()
@@ -77,10 +77,10 @@ class ProductExpanderTest extends Unit
 
         $this->brandReaderMock->expects($this->atLeastOnce())
             ->method('getBrandCollectionByIdProductAbstractId')
-            ->with($this->productTransfer)
+            ->with($this->productAbstractTransfer)
             ->willReturn($this->brandCollectionTransferMock);
 
-        $changedProductTransfer = $this->productExpander->expandProductAbstractTransferWithBrand($this->productTransfer);
+        $changedProductTransfer = $this->productExpander->expandProductAbstractTransferWithBrand($this->productAbstractTransfer);
 
         $this->assertEquals($changedProductTransfer->getBrandCollection(), new BrandCollectionTransfer());
     }
@@ -96,10 +96,10 @@ class ProductExpanderTest extends Unit
 
         $this->brandReaderMock->expects($this->atLeastOnce())
             ->method('getBrandCollectionByIdProductAbstractId')
-            ->with($this->productTransfer)
+            ->with($this->productAbstractTransfer)
             ->willReturn($this->brandCollectionTransferMock);
 
-        $changedProductTransfer = $this->productExpander->expandProductAbstractTransferWithBrand($this->productTransfer);
+        $changedProductTransfer = $this->productExpander->expandProductAbstractTransferWithBrand($this->productAbstractTransfer);
 
         $this->assertEquals($changedProductTransfer->getBrandCollection(), $this->brandCollectionTransferMock);
     }

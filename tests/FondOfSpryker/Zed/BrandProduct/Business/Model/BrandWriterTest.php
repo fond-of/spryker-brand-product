@@ -131,6 +131,11 @@ class BrandWriterTest extends Unit
             ->method('getIdProductAbstract')
             ->willReturn(1);
 
+        $this->productAbstractTransferMock
+            ->expects($this->atLeastOnce())
+            ->method('setBrandCollection')
+            ->willReturn($this->productAbstractTransferMock);
+
         $this->brandProductEntityManagerMock->expects($this->never())
             ->method('deleteByProductAbstractId');
 
