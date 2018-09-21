@@ -33,6 +33,26 @@ class BrandWriter implements BrandWriterInterface
     /**
      * @param \Generated\Shared\Transfer\ProductAbstractTransfer $productAbstractTransfer
      *
+     * @return \Generated\Shared\Transfer\ProductAbstractTransfer $productAbstractTransfer
+     */
+    public function createProductAbstractBrands(ProductAbstractTransfer $productAbstractTransfer): ProductAbstractTransfer
+    {
+        if ($productAbstractTransfer->getBrandCollection() !== null) {
+            $requestedBrandIds = $this->getBrandIds($productAbstractTransfer->getBrandCollection());
+
+            if (count($requestedBrandIds) > 0) {
+                $this->brandProductEntityManager->addBrandProductRelations($productAbstractTransfer->getIdProductAbstract(), $requestedBrandIds);
+            }
+
+            $productAbstractTransfer->setBrandCollection($this->brandProductReader->getBrandCollectionByIdProductAbstractId($productAbstractTransfer));
+        }
+
+        return $productAbstractTransfer;
+    }
+
+    /**
+     * @param \Generated\Shared\Transfer\ProductAbstractTransfer $productAbstractTransfer
+     *
      * @return \Generated\Shared\Transfer\ProductAbstractTransfer
      */
     public function updateProductAbstractBrands(ProductAbstractTransfer $productAbstractTransfer): ProductAbstractTransfer

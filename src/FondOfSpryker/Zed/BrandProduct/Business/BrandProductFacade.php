@@ -52,12 +52,18 @@ class BrandProductFacade extends AbstractFacade implements BrandProductFacadeInt
     }
 
     /**
-     * Specification:
-     * - Persists all provided brands to database for the given abstract product.
-     * - Returns ProductAbstractTransfer along with the data from the persisted BrandTransfer.
+     * @param \Generated\Shared\Transfer\ProductAbstractTransfer $productAbstractTransfer
      *
-     * @api
-     *
+     * @return \Generated\Shared\Transfer\ProductAbstractTransfer
+     */
+    public function createProductAbstractBrands(ProductAbstractTransfer $productAbstractTransfer): ProductAbstractTransfer
+    {
+        return $this->getFactory()
+            ->createBrandWriter()
+            ->createProductAbstractBrands($productAbstractTransfer);
+    }
+
+    /**
      * @param \Generated\Shared\Transfer\ProductAbstractTransfer $productAbstractTransfer
      *
      * @return \Generated\Shared\Transfer\ProductAbstractTransfer

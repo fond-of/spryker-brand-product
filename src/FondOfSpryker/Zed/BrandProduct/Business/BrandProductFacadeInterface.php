@@ -46,6 +46,19 @@ interface BrandProductFacadeInterface
 
     /**
      * Specification:
+     * - Persists all provided brands to database for the given abstract product.
+     * - Returns ProductAbstractTransfer along with the data from the persisted BrandTransfer.
+     *
+     * @api
+     *
+     * @param \Generated\Shared\Transfer\ProductAbstractTransfer $productAbstractTransfer
+     *
+     * @return \Generated\Shared\Transfer\ProductAbstractTransfer
+     */
+    public function createProductAbstractBrands(ProductAbstractTransfer $productAbstractTransfer): ProductAbstractTransfer;
+
+    /**
+     * Specification:
      * - Persists provided brand to database or delete if not exists anymore for the given abstract product.
      * - Returns ProductAbstractTransfer along with the data from the persisted BrandTransfer.
      *
