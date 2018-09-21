@@ -52,7 +52,7 @@ class BrandReaderTest extends Unit
 
         $this->productAbstractTransferMock = $this->getMockBuilder('\Generated\Shared\Transfer\ProductAbstractTransfer')
             ->disableOriginalConstructor()
-            ->setMethods(['requireIdProductAbstract', 'getIdProductAbstract'])
+            ->setMethods(['requireIdProductAbstract', 'getIdProductAbstract', 'setBrandCollection'])
             ->getMock();
 
         $this->brandProductAbstractRelationTransferMock = $this->getMockBuilder('\Generated\Shared\Transfer\BrandProductAbstractRelationTransfer')

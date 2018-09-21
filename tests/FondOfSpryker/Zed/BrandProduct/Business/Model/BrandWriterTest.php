@@ -45,7 +45,7 @@ class BrandWriterTest extends Unit
 
         $this->productAbstractTransferMock = $this->getMockBuilder('\Generated\Shared\Transfer\ProductAbstractTransfer')
             ->disableOriginalConstructor()
-            ->setMethods(['getBrandCollection', 'getIdProductAbstract'])
+            ->setMethods(['getBrandCollection', 'getIdProductAbstract', 'setBrandCollection'])
             ->getMock();
 
         $this->brandCollectionTransferMock = $this->getMockBuilder('\Generated\Shared\Transfer\BrandCollectionTransfer')
