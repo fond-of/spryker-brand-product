@@ -13,30 +13,6 @@ use Spryker\Zed\Kernel\Business\AbstractFacade;
 class BrandProductFacade extends AbstractFacade implements BrandProductFacadeInterface
 {
     /**
-     * @param \Generated\Shared\Transfer\ProductAbstractTransfer $productAbstractTransfer
-     *
-     * @return \Generated\Shared\Transfer\ProductAbstractTransfer
-     */
-    public function expandProductAbstractTransferWithBrand(ProductAbstractTransfer $productAbstractTransfer): ProductAbstractTransfer
-    {
-        return $this->getFactory()
-            ->createProductExpander()
-            ->expandProductAbstractTransferWithBrand($productAbstractTransfer);
-    }
-
-    /**
-     * @param \Generated\Shared\Transfer\BrandTransfer $brandTransfer
-     *
-     * @return \Generated\Shared\Transfer\BrandTransfer
-     */
-    public function expandBrandTransferWithProductAbstractRelations(BrandTransfer $brandTransfer): BrandTransfer
-    {
-        return $this->getFactory()
-            ->createBrandExpander()
-            ->expandBrandTransferWithProductAbstractRelations($brandTransfer);
-    }
-
-    /**
      * @param int $idProductAbstract
      *
      * @return \Generated\Shared\Transfer\BrandCollectionTransfer
@@ -56,22 +32,10 @@ class BrandProductFacade extends AbstractFacade implements BrandProductFacadeInt
      *
      * @return \Generated\Shared\Transfer\ProductAbstractTransfer
      */
-    public function createProductAbstractBrands(ProductAbstractTransfer $productAbstractTransfer): ProductAbstractTransfer
+    public function saveProductAbstractBrand(ProductAbstractTransfer $productAbstractTransfer): ProductAbstractTransfer
     {
         return $this->getFactory()
-            ->createBrandWriter()
-            ->createProductAbstractBrands($productAbstractTransfer);
-    }
-
-    /**
-     * @param \Generated\Shared\Transfer\ProductAbstractTransfer $productAbstractTransfer
-     *
-     * @return \Generated\Shared\Transfer\ProductAbstractTransfer
-     */
-    public function updateProductAbstractBrands(ProductAbstractTransfer $productAbstractTransfer): ProductAbstractTransfer
-    {
-        return $this->getFactory()
-            ->createBrandWriter()
-            ->updateProductAbstractBrands($productAbstractTransfer);
+            ->createBrandProductWriter()
+            ->saveProductAbstractBrand($productAbstractTransfer);
     }
 }

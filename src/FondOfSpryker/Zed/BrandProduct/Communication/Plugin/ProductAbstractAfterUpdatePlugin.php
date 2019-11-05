@@ -17,8 +17,8 @@ class ProductAbstractAfterUpdatePlugin extends AbstractPlugin implements Product
      *
      * @return \Generated\Shared\Transfer\ProductAbstractTransfer
      */
-    public function update(ProductAbstractTransfer $productAbstractTransfer)
+    public function update(ProductAbstractTransfer $productAbstractTransfer): ProductAbstractTransfer
     {
-        return $this->getFacade()->updateProductAbstractBrands($productAbstractTransfer);
+        return $this->getFacade()->saveProductAbstractBrand($productAbstractTransfer);
     }
 }

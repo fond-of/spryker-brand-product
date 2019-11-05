@@ -10,30 +10,6 @@ interface BrandProductFacadeInterface
 {
     /**
      * Specification:
-     * - Expands product abstract transfer with BrandTransfer.
-     *
-     * @api
-     *
-     * @param \Generated\Shared\Transfer\ProductAbstractTransfer $productAbstractTransfer
-     *
-     * @return \Generated\Shared\Transfer\ProductAbstractTransfer
-     */
-    public function expandProductAbstractTransferWithBrand(ProductAbstractTransfer $productAbstractTransfer): ProductAbstractTransfer;
-
-    /**
-     * Specification:
-     * - Expands brand transfer with BrandProductAbstractRelationTransfer
-     *
-     * @api
-     *
-     * @param \Generated\Shared\Transfer\BrandTransfer $brandTransfer
-     *
-     * @return \Generated\Shared\Transfer\BrandTransfer
-     */
-    public function expandBrandTransferWithProductAbstractRelations(BrandTransfer $brandTransfer): BrandTransfer;
-
-    /**
-     * Specification:
      * - Find brand by product abstract id
      *
      * @api
@@ -45,28 +21,9 @@ interface BrandProductFacadeInterface
     public function getBrandsByProductAbstractId(int $idProductAbstract): BrandCollectionTransfer;
 
     /**
-     * Specification:
-     * - Persists all provided brands to database for the given abstract product.
-     * - Returns ProductAbstractTransfer along with the data from the persisted BrandTransfer.
-     *
-     * @api
-     *
      * @param \Generated\Shared\Transfer\ProductAbstractTransfer $productAbstractTransfer
      *
      * @return \Generated\Shared\Transfer\ProductAbstractTransfer
      */
-    public function createProductAbstractBrands(ProductAbstractTransfer $productAbstractTransfer): ProductAbstractTransfer;
-
-    /**
-     * Specification:
-     * - Persists provided brand to database or delete if not exists anymore for the given abstract product.
-     * - Returns ProductAbstractTransfer along with the data from the persisted BrandTransfer.
-     *
-     * @api
-     *
-     * @param \Generated\Shared\Transfer\ProductAbstractTransfer $productAbstractTransfer
-     *
-     * @return \Generated\Shared\Transfer\ProductAbstractTransfer
-     */
-    public function updateProductAbstractBrands(ProductAbstractTransfer $productAbstractTransfer): ProductAbstractTransfer;
+    public function saveProductAbstractBrand(ProductAbstractTransfer $productAbstractTransfer): ProductAbstractTransfer;
 }

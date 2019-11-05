@@ -25,7 +25,7 @@ class BrandProductPersistenceFactory extends AbstractPersistenceFactory
     /**
      * @return \Orm\Zed\BrandProduct\Persistence\FosBrandProductQuery
      */
-    public function getBrandProductQuery(): FosBrandProductQuery
+    public function createBrandProductQuery(): FosBrandProductQuery
     {
         return $this->getProvidedDependency(BrandProductDependencyProvider::PROPEL_QUERY_BRAND_PRODUCT);
     }

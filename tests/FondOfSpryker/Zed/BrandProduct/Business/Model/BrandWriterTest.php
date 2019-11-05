@@ -57,7 +57,7 @@ class BrandWriterTest extends Unit
             ->disableOriginalConstructor()
             ->getMock();
 
-        $this->brandWriter = new BrandWriter($this->brandProductEntityManagerMock, $this->brandReaderMock);
+        $this->brandWriter = new BrandProductWriter($this->brandProductEntityManagerMock, $this->brandReaderMock);
     }
 
     /**

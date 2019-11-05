@@ -2,6 +2,8 @@
 
 namespace FondOfSpryker\Zed\BrandProduct\Persistence;
 
+use Generated\Shared\Transfer\BrandProductAbstractRelationTransfer;
+use Generated\Shared\Transfer\BrandProductTransfer;
 use Orm\Zed\BrandProduct\Persistence\FosBrandProduct;
 use Spryker\Zed\Kernel\Persistence\AbstractEntityManager;
 
@@ -26,25 +28,29 @@ class BrandProductEntityManager extends AbstractEntityManager implements BrandPr
     }
 
     /**
-     * Add brand product relation
+     * @param \Generated\Shared\Transfer\BrandProductTransfer $brandProductTransfer
+     * @return \Generated\Shared\Transfer\BrandProductTransfer
      *
-     * @param int $idProductAbstract
-     * @param array $brandIds
-     *
-     * @return void
+     * @throws \Propel\Runtime\Exception\PropelException
+     * @throws \Spryker\Zed\Propel\Business\Exception\AmbiguousComparisonException
      */
-    public function addBrandProductRelations(int $idProductAbstract, array $brandIds): void
-    {
-        if (count($brandIds) === 0) {
-            return;
-        }
+    public function saveBrandProduct(
+        BrandProductTransfer $brandProductTransfer
+    ): BrandProductTransfer {
 
-        foreach ($brandIds as $brandId) {
-            $entity = new FosBrandProduct();
-            $entity->setFkProductAbstract($idProductAbstract)
-                ->setFkBrand($brandId)
-                ->save();
-        }
+        $fosBrandProduct = $this->getFactory()
+            ->createBrandProductQuery()
+            ->filterByFkProductAbstract($brandProductTransfer->getFkProductAbstract())
+            ->findOneOrCreate();
+
+        $fosBrandProduct = $this->getFactory()
+            ->createBrandProductMapper()
+            ->mapTransferToEntity($brandProductTransfer, $fosBrandProduct);
+
+        $fosBrandProduct->save();
+
+        return $brandProductTransfer;
+
     }
 
     /**

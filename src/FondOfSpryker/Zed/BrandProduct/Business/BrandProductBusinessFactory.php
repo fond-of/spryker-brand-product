@@ -2,14 +2,13 @@
 
 namespace FondOfSpryker\Zed\BrandProduct\Business;
 
-use FondOfSpryker\Zed\BrandProduct\Business\Model\BrandExpander;
-use FondOfSpryker\Zed\BrandProduct\Business\Model\BrandExpanderInterface;
+use FondOfSpryker\Zed\Brand\Business\BrandFacadeInterface;
+use FondOfSpryker\Zed\BrandProduct\BrandProductDependencyProvider;
+use FondOfSpryker\Zed\BrandProduct\Business\Model\BrandProductWriterInterface;
 use FondOfSpryker\Zed\BrandProduct\Business\Model\BrandReader;
 use FondOfSpryker\Zed\BrandProduct\Business\Model\BrandReaderInterface;
-use FondOfSpryker\Zed\BrandProduct\Business\Model\BrandWriter;
+use FondOfSpryker\Zed\BrandProduct\Business\Model\BrandProductWriter;
 use FondOfSpryker\Zed\BrandProduct\Business\Model\BrandWriterInterface;
-use FondOfSpryker\Zed\BrandProduct\Business\Model\ProductExpander;
-use FondOfSpryker\Zed\BrandProduct\Business\Model\ProductExpanderInterface;
 use Spryker\Zed\Kernel\Business\AbstractBusinessFactory;
 
 /**
@@ -26,26 +25,28 @@ class BrandProductBusinessFactory extends AbstractBusinessFactory
     }
 
     /**
-     * @return \FondOfSpryker\Zed\BrandProduct\Business\Model\BrandWriterInterface
+     * @return \FondOfSpryker\Zed\BrandProduct\Business\Model\BrandProductWriterInterface
+     *
+     * @throws \Spryker\Zed\Kernel\Exception\Container\ContainerKeyNotFoundException
      */
-    public function createBrandWriter(): BrandWriterInterface
+    public function createBrandProductWriter(): BrandProductWriterInterface
     {
-        return new BrandWriter($this->getEntityManager(), $this->createBrandReader());
+        return new BrandProductWriter(
+            $this->getEntityManager(),
+            $this->getBrandFacade(),
+            $this->createBrandReader(),
+            $this->getConfig()
+        );
     }
 
     /**
-     * @return \FondOfSpryker\Zed\BrandProduct\Business\Model\ProductExpanderInterface
+     * @return \FondOfSpryker\Zed\Brand\Business\BrandFacadeInterface
+     *
+     * @throws \Spryker\Zed\Kernel\Exception\Container\ContainerKeyNotFoundException
      */
-    public function createProductExpander(): ProductExpanderInterface
+    protected function getBrandFacade(): BrandFacadeInterface
     {
-        return new ProductExpander($this->createBrandReader());
+        return $this->getProvidedDependency(BrandProductDependencyProvider::FACADE_BRAND);
     }
 
-    /**
-     * @return \FondOfSpryker\Zed\BrandProduct\Business\Model\BrandExpanderInterface
-     */
-    public function createBrandExpander(): BrandExpanderInterface
-    {
-        return new BrandExpander($this->createBrandReader());
-    }
 }
