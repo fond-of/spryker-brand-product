@@ -31,8 +31,7 @@ class BrandProductEntityManager extends AbstractEntityManager implements BrandPr
      * @param \Generated\Shared\Transfer\BrandProductTransfer $brandProductTransfer
      * @return \Generated\Shared\Transfer\BrandProductTransfer
      *
-     * @throws \Propel\Runtime\Exception\PropelException
-     * @throws \Spryker\Zed\Propel\Business\Exception\AmbiguousComparisonException
+     * @throws
      */
     public function saveBrandProduct(
         BrandProductTransfer $brandProductTransfer

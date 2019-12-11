@@ -3,6 +3,8 @@
 namespace FondOfSpryker\Zed\BrandProduct\Persistence;
 
 use FondOfSpryker\Zed\BrandProduct\BrandProductDependencyProvider;
+use FondOfSpryker\Zed\BrandProduct\Persistence\Propel\Mapper\BrandMapper;
+use FondOfSpryker\Zed\BrandProduct\Persistence\Propel\Mapper\BrandMapperInterface;
 use FondOfSpryker\Zed\BrandProduct\Persistence\Propel\Mapper\BrandProductMapper;
 use FondOfSpryker\Zed\BrandProduct\Persistence\Propel\Mapper\BrandProductMapperInterface;
 use Orm\Zed\Brand\Persistence\FosBrandQuery;
@@ -11,6 +13,8 @@ use Spryker\Zed\Kernel\Persistence\AbstractPersistenceFactory;
 
 /**
  * @method \FondOfSpryker\Zed\BrandProduct\BrandProductConfig getConfig()
+ * @method \FondOfSpryker\Zed\BrandProduct\Persistence\BrandProductEntityManagerInterface getEntityManager()
+ * @method \FondOfSpryker\Zed\BrandProduct\Persistence\BrandProductRepositoryInterface getRepository()
  */
 class BrandProductPersistenceFactory extends AbstractPersistenceFactory
 {
@@ -36,5 +40,13 @@ class BrandProductPersistenceFactory extends AbstractPersistenceFactory
     public function createBrandProductMapper(): BrandProductMapperInterface
     {
         return new BrandProductMapper();
+    }
+
+    /**
+     * @return \FondOfSpryker\Zed\BrandProduct\Persistence\Propel\Mapper\BrandMapperInterface
+     */
+    public function createBrandMapper(): BrandMapperInterface
+    {
+        return new BrandMapper();
     }
 }

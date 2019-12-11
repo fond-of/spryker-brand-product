@@ -8,4 +8,20 @@
         <property name="fkProductAbstract" type="int"/>
     </transfer>
 
+    <transfer name="ProductAbstract">
+        <property name="idProductAbstract" type="int" />
+        <property name="brandRelation" type="BrandRelation"/>
+    </transfer>
+
+
+    <transfer name="BrandRelation">
+        <property name="idBrand" type="int" />
+        <property name="idBrands" type="int[]" />
+        <property name="brands" type="Brand[]" />
+    </transfer>
+
+    <transfer name="Brand">
+        <property name="name" type="string" />
+    </transfer>
+
 </transfers>

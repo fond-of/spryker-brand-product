@@ -8,7 +8,7 @@ use Spryker\Zed\Product\Dependency\Plugin\ProductAbstractPluginUpdateInterface;
 
 /**
  * @method \FondOfSpryker\Zed\BrandProduct\Business\BrandProductFacadeInterface getFacade()
- * @method \FondOfSpryker\Zed\BrandProduct\Communication\BrandProductCommunicationFactory getFactory()
+
  */
 class ProductAbstractAfterUpdatePlugin extends AbstractPlugin implements ProductAbstractPluginUpdateInterface
 {
