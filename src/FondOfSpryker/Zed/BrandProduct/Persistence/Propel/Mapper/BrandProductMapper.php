@@ -2,20 +2,25 @@
 
 namespace FondOfSpryker\Zed\BrandProduct\Persistence\Propel\Mapper;
 
-use Generated\Shared\Transfer\BrandTransfer;
-use Orm\Zed\Brand\Persistence\FosBrand;
+use Generated\Shared\Transfer\BrandProductTransfer;
+use Orm\Zed\BrandProduct\Persistence\FosBrandProduct;
 
 class BrandProductMapper implements BrandProductMapperInterface
 {
     /**
-     * @param \Orm\Zed\Brand\Persistence\FosBrand $fosBrand
-     * @param \Generated\Shared\Transfer\BrandTransfer $brandTransfer
+     * @param \Generated\Shared\Transfer\BrandProductTransfer $brandProductTransfer
+     * @param \Orm\Zed\BrandProduct\Persistence\FosBrandProduct $fosBrandProduct
      *
-     * @return \Generated\Shared\Transfer\BrandTransfer
+     * @return \Orm\Zed\BrandProduct\Persistence\FosBrandProduct
      */
-    public function mapBrand(FosBrand $fosBrand, BrandTransfer $brandTransfer): BrandTransfer
-    {
-        $brandTransfer->fromArray($fosBrand->toArray(), true);
-        return $brandTransfer;
+    public function mapTransferToEntity(
+        BrandProductTransfer $brandProductTransfer,
+        FosBrandProduct $fosBrandProduct
+    ): FosBrandProduct {
+        $fosBrandProduct->fromArray(
+            $brandProductTransfer->modifiedToArray(false)
+        );
+
+        return $fosBrandProduct;
     }
 }

@@ -28,11 +28,11 @@ class BrandProductRepository extends AbstractRepository implements BrandProductR
             ->find();
 
         $brandCollectionTransfer = new BrandCollectionTransfer();
-        $brandProductMapper = $this->getFactory()->createBrandProductMapper();
+        $brandProductMapper = $this->getFactory()->createBrandMapper();
 
         foreach ($brandEntities as $brandEntity) {
             $brandCollectionTransfer->addBrand(
-                $brandProductMapper->mapBrand($brandEntity, new BrandTransfer())
+                $brandProductMapper->mapEntityToTransfer($brandEntity, new BrandTransfer())
             );
         }
 
@@ -57,6 +57,7 @@ class BrandProductRepository extends AbstractRepository implements BrandProductR
 
         if ($brandEntities->isEmpty() === false) {
             $brandProductMapper = $this->getFactory()->createBrandProductMapper();
+
             return $brandProductMapper->mapBrand($brandEntities->getFirst(), new BrandTransfer());
         }
 

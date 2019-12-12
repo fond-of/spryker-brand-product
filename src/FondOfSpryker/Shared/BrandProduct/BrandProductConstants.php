@@ -1,10 +1,8 @@
 <?php
 
-namespace FondOfSpryker\Shared\Product;
+namespace FondOfSpryker\Shared\BrandProduct;
 
-/**
- * Declares global environment configuration keys. Do not use it for other class constants.
- */
 interface BrandProductConstants
 {
+    public const PRODUCT_ATTRIBUTE_BRAND = 'PRODUCT_ATTRIBUTE_BRAND';
 }

@@ -12,6 +12,20 @@ class BrandProductDependencyProvider extends AbstractBundleDependencyProvider
     public const PROPEL_QUERY_BRAND = 'PROPEL_QUERY_BRAND';
     public const PROPEL_QUERY_BRAND_PRODUCT = 'PROPEL_QUERY_BRAND_PRODUCT';
 
+    public const FACADE_BRAND = 'facade_brand';
+
+    /**
+     * @param \Spryker\Zed\Kernel\Container $container
+     * @return \Spryker\Zed\Kernel\Container
+     */
+    public function provideBusinessLayerDependencies(Container $container)
+    {
+        $container = parent::provideBusinessLayerDependencies($container);
+        $container = $this->addBrandFacade($container);
+
+        return $container;
+    }
+
     /**
      * @param \Spryker\Zed\Kernel\Container $container
      *
@@ -22,6 +36,20 @@ class BrandProductDependencyProvider extends AbstractBundleDependencyProvider
         $container = parent::providePersistenceLayerDependencies($container);
         $container = $this->addBrandPropelQuery($container);
         $container = $this->addBrandProductPropelQuery($container);
+
+        return $container;
+    }
+
+    /**
+     * @param \Spryker\Zed\Kernel\Container $container
+     *
+     * @return \Spryker\Zed\Kernel\Container
+     */
+    protected function addBrandFacade(Container $container)
+    {
+        $container[static::FACADE_BRAND] = function (Container $container) {
+            return $container->getLocator()->brand()->facade();
+        };
 
         return $container;
     }

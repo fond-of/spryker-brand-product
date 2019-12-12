@@ -8,7 +8,7 @@ use Spryker\Zed\Product\Dependency\Plugin\ProductAbstractPluginUpdateInterface;
 
 /**
  * @method \FondOfSpryker\Zed\BrandProduct\Business\BrandProductFacadeInterface getFacade()
- * @method \FondOfSpryker\Zed\BrandProduct\Communication\BrandProductCommunicationFactory getFactory()
+
  */
 class ProductAbstractAfterUpdatePlugin extends AbstractPlugin implements ProductAbstractPluginUpdateInterface
 {
@@ -17,8 +17,8 @@ class ProductAbstractAfterUpdatePlugin extends AbstractPlugin implements Product
      *
      * @return \Generated\Shared\Transfer\ProductAbstractTransfer
      */
-    public function update(ProductAbstractTransfer $productAbstractTransfer)
+    public function update(ProductAbstractTransfer $productAbstractTransfer): ProductAbstractTransfer
     {
-        return $this->getFacade()->updateProductAbstractBrands($productAbstractTransfer);
+        return $this->getFacade()->saveProductAbstractBrand($productAbstractTransfer);
     }
 }
