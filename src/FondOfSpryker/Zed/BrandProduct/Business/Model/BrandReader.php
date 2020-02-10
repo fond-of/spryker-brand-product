@@ -28,23 +28,29 @@ class BrandReader implements BrandReaderInterface
      *
      * @return \Generated\Shared\Transfer\BrandCollectionTransfer
      */
-    public function getBrandCollectionByIdProductAbstractId(ProductAbstractTransfer $productAbstractTransfer): BrandCollectionTransfer
-    {
+    public function getBrandCollectionByIdProductAbstractId(
+        ProductAbstractTransfer $productAbstractTransfer
+    ): BrandCollectionTransfer {
         $productAbstractTransfer->requireIdProductAbstract();
 
-        return $this->brandProductRepository->getBrandCollectionByAbstractIdProduct($productAbstractTransfer->getIdProductAbstract());
+        return $this->brandProductRepository->getBrandCollectionByAbstractIdProduct(
+            $productAbstractTransfer->getIdProductAbstract()
+        );
     }
 
     /**
      * @param \Generated\Shared\Transfer\ProductAbstractTransfer $productAbstractTransfer
      *
-     * @return \Generated\Shared\Transfer\BrandTransfer
+     * @return \Generated\Shared\Transfer\BrandTransfer|null
      */
-    public function getFirstBrandByProductAbstractId(ProductAbstractTransfer $productAbstractTransfer): ?BrandTransfer
-    {
+    public function getFirstBrandByProductAbstractId(
+        ProductAbstractTransfer $productAbstractTransfer
+    ): ?BrandTransfer {
         $productAbstractTransfer->requireIdProductAbstract();
 
-        return $this->brandProductRepository->getFirstBrandByProductAbstractId($productAbstractTransfer->getIdProductAbstract());
+        return $this->brandProductRepository->getFirstBrandByProductAbstractId(
+            $productAbstractTransfer->getIdProductAbstract()
+        );
     }
 
     /**
@@ -52,10 +58,13 @@ class BrandReader implements BrandReaderInterface
      *
      * @return \Generated\Shared\Transfer\BrandProductAbstractRelationTransfer
      */
-    public function getProductAbstractCollectionByBrand(BrandTransfer $brandTransfer): BrandProductAbstractRelationTransfer
-    {
+    public function getProductAbstractCollectionByBrand(
+        BrandTransfer $brandTransfer
+    ): BrandProductAbstractRelationTransfer {
         $brandTransfer->requireIdBrand();
 
-        return $this->brandProductRepository->getProductAbstractCollectionByBrandId($brandTransfer->getIdBrand());
+        return $this->brandProductRepository->getProductAbstractCollectionByBrandId(
+            $brandTransfer->getIdBrand()
+        );
     }
 }

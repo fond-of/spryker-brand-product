@@ -16,6 +16,9 @@ class BrandProductWriter implements BrandProductWriterInterface
      */
     protected $brandProductEntityManager;
 
+    /**
+     * @var \FondOfSpryker\Zed\Brand\Business\BrandFacadeInterface
+     */
     protected $brandFacade;
 
     /**
@@ -29,9 +32,8 @@ class BrandProductWriter implements BrandProductWriterInterface
     protected $config;
 
     /**
-     * BrandWriter constructor.
-     *
      * @param \FondOfSpryker\Zed\BrandProduct\Persistence\BrandProductEntityManagerInterface $brandProductEntityManager
+     * @param \FondOfSpryker\Zed\Brand\Business\BrandFacadeInterface $brandFacade
      * @param \FondOfSpryker\Zed\BrandProduct\Business\Model\BrandReaderInterface $brandProductReader
      * @param \FondOfSpryker\Zed\BrandProduct\BrandProductConfig $config
      */
@@ -40,7 +42,6 @@ class BrandProductWriter implements BrandProductWriterInterface
         BrandFacadeInterface $brandFacade,
         BrandReaderInterface $brandProductReader,
         BrandProductConfig $config
-
     ) {
         $this->brandProductEntityManager = $brandProductEntityManager;
         $this->brandFacade = $brandFacade;
@@ -74,7 +75,6 @@ class BrandProductWriter implements BrandProductWriterInterface
         $this->brandProductEntityManager->saveBrandProduct($brandProductTransfer);
 
         return $productAbstractTransfer;
-
     }
 
     /**
@@ -84,6 +84,9 @@ class BrandProductWriter implements BrandProductWriterInterface
      */
     protected function getBrandIdByBrandName(string $name): BrandTransfer
     {
-        return $this->brandFacade->findBrandByName((new BrandTransfer())->setName($name));
+        $brandTransfer = (new BrandTransfer())
+            ->setName($name);
+
+        return $this->brandFacade->findBrandByName($brandTransfer);
     }
 }

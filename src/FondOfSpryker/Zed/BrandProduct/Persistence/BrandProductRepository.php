@@ -77,14 +77,13 @@ class BrandProductRepository extends AbstractRepository implements BrandProductR
             ->findByFkBrand($idBrand);
 
         $productAbstractIds = [];
+
         foreach ($brandProductEntities as $entity) {
             $productAbstractIds[] = $entity->getFkProductAbstract();
         }
 
-        $brandCollectionTransfer = new BrandProductAbstractRelationTransfer();
-        $brandCollectionTransfer->setIdBrand($idBrand);
-        $brandCollectionTransfer->setProductAbstractIds($productAbstractIds);
-
-        return $brandCollectionTransfer;
+        return (new BrandProductAbstractRelationTransfer())
+            ->setIdBrand($idBrand)
+            ->setProductAbstractIds($productAbstractIds);
     }
 }

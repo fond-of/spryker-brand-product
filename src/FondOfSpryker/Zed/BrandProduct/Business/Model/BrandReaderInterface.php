@@ -14,19 +14,25 @@ interface BrandReaderInterface
      *
      * @return \Generated\Shared\Transfer\BrandCollectionTransfer
      */
-    public function getBrandCollectionByIdProductAbstractId(ProductAbstractTransfer $productAbstractTransfer): BrandCollectionTransfer;
+    public function getBrandCollectionByIdProductAbstractId(
+        ProductAbstractTransfer $productAbstractTransfer
+    ): BrandCollectionTransfer;
 
     /**
      * @param \Generated\Shared\Transfer\ProductAbstractTransfer $productAbstractTransfer
      *
      * @return \Generated\Shared\Transfer\BrandTransfer|null
      */
-    public function getFirstBrandByProductAbstractId(ProductAbstractTransfer $productAbstractTransfer): ?BrandTransfer;
+    public function getFirstBrandByProductAbstractId(
+        ProductAbstractTransfer $productAbstractTransfer
+    ): ?BrandTransfer;
 
     /**
      * @param \Generated\Shared\Transfer\BrandTransfer $brandTransfer
      *
      * @return \Generated\Shared\Transfer\BrandProductAbstractRelationTransfer
      */
-    public function getProductAbstractCollectionByBrand(BrandTransfer $brandTransfer): BrandProductAbstractRelationTransfer;
+    public function getProductAbstractCollectionByBrand(
+        BrandTransfer $brandTransfer
+    ): BrandProductAbstractRelationTransfer;
 }

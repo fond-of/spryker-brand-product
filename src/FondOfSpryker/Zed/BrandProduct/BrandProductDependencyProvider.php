@@ -16,11 +16,13 @@ class BrandProductDependencyProvider extends AbstractBundleDependencyProvider
 
     /**
      * @param \Spryker\Zed\Kernel\Container $container
+     *
      * @return \Spryker\Zed\Kernel\Container
      */
-    public function provideBusinessLayerDependencies(Container $container)
+    public function provideBusinessLayerDependencies(Container $container): Container
     {
         $container = parent::provideBusinessLayerDependencies($container);
+
         $container = $this->addBrandFacade($container);
 
         return $container;
@@ -34,6 +36,7 @@ class BrandProductDependencyProvider extends AbstractBundleDependencyProvider
     public function providePersistenceLayerDependencies(Container $container): Container
     {
         $container = parent::providePersistenceLayerDependencies($container);
+
         $container = $this->addBrandPropelQuery($container);
         $container = $this->addBrandProductPropelQuery($container);
 
@@ -45,9 +48,9 @@ class BrandProductDependencyProvider extends AbstractBundleDependencyProvider
      *
      * @return \Spryker\Zed\Kernel\Container
      */
-    protected function addBrandFacade(Container $container)
+    protected function addBrandFacade(Container $container): Container
     {
-        $container[static::FACADE_BRAND] = function (Container $container) {
+        $container[static::FACADE_BRAND] = static function (Container $container) {
             return $container->getLocator()->brand()->facade();
         };
 
@@ -61,7 +64,7 @@ class BrandProductDependencyProvider extends AbstractBundleDependencyProvider
      */
     protected function addBrandPropelQuery(Container $container): Container
     {
-        $container[static::PROPEL_QUERY_BRAND] = function (Container $container) {
+        $container[static::PROPEL_QUERY_BRAND] = static function () {
             return FosBrandQuery::create();
         };
 
@@ -75,7 +78,7 @@ class BrandProductDependencyProvider extends AbstractBundleDependencyProvider
      */
     protected function addBrandProductPropelQuery(Container $container): Container
     {
-        $container[static::PROPEL_QUERY_BRAND_PRODUCT] = function (Container $container) {
+        $container[static::PROPEL_QUERY_BRAND_PRODUCT] = static function () {
             return FosBrandProductQuery::create();
         };
 

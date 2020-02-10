@@ -10,7 +10,7 @@ class BrandProductConfig extends AbstractBundleConfig
     /**
      * @return string
      */
-    public function getBrandProductAttribute()
+    public function getBrandProductAttribute(): string
     {
         return $this->get(BrandProductConstants::PRODUCT_ATTRIBUTE_BRAND, 'brand');
     }
