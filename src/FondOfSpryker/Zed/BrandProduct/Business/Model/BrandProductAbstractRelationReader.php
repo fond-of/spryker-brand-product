@@ -3,7 +3,9 @@
 namespace FondOfSpryker\Zed\BrandProduct\Business\Model;
 
 use FondOfSpryker\Zed\BrandProduct\Persistence\BrandProductRepositoryInterface;
+use Generated\Shared\Transfer\BrandCollectionTransfer;
 use Generated\Shared\Transfer\BrandProductAbstractRelationTransfer;
+use Generated\Shared\Transfer\ProductAbstractTransfer;
 
 class BrandProductAbstractRelationReader implements BrandProductAbstractRelationReaderInterface
 {
@@ -33,5 +35,17 @@ class BrandProductAbstractRelationReader implements BrandProductAbstractRelation
         $brandProductAbstractRelationTransfer->setProductAbstractIds($productAbstractIds);
 
         return $brandProductAbstractRelationTransfer;
+    }
+
+    /**
+     * @param \Generated\Shared\Transfer\ProductAbstractTransfer $productTransfer
+     *
+     * @return \Generated\Shared\Transfer\BrandCollectionTransfer
+     */
+    public function getBrandCollectionByIdProductAbstractId(ProductAbstractTransfer $productAbstractTransfer): BrandCollectionTransfer
+    {
+        $productAbstractTransfer->requireIdProductAbstract();
+
+        return $this->brandProductRepository->getBrandCollectionByAbstractIdProduct($productAbstractTransfer->getIdProductAbstract());
     }
 }

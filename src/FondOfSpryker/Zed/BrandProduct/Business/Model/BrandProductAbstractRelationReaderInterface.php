@@ -2,7 +2,9 @@
 
 namespace FondOfSpryker\Zed\BrandProduct\Business\Model;
 
+use Generated\Shared\Transfer\BrandCollectionTransfer;
 use Generated\Shared\Transfer\BrandProductAbstractRelationTransfer;
+use Generated\Shared\Transfer\ProductAbstractTransfer;
 
 interface BrandProductAbstractRelationReaderInterface
 {
@@ -14,4 +16,13 @@ interface BrandProductAbstractRelationReaderInterface
     public function getBrandProductAbstractRelation(
         BrandProductAbstractRelationTransfer $brandProductAbstractRelationTransfer
     ): BrandProductAbstractRelationTransfer;
+
+    /**
+     * @param \Generated\Shared\Transfer\ProductAbstractTransfer $productAbstractTransfer
+     *
+     * @return \Generated\Shared\Transfer\BrandCollectionTransfer
+     */
+    public function getBrandCollectionByIdProductAbstractId(
+        ProductAbstractTransfer $productAbstractTransfer
+    ): BrandCollectionTransfer;
 }

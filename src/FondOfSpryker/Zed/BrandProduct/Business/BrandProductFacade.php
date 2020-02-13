@@ -30,7 +30,7 @@ class BrandProductFacade extends AbstractFacade implements BrandProductFacadeInt
             ->setIdProductAbstract($idProductAbstract);
 
         return $this->getFactory()
-            ->createBrandReader()
+            ->createBrandProductAbstractRelationReader()
             ->getBrandCollectionByIdProductAbstractId($productAbstractTransfer);
     }
 
@@ -46,7 +46,7 @@ class BrandProductFacade extends AbstractFacade implements BrandProductFacadeInt
     public function saveProductAbstractBrand(ProductAbstractTransfer $productAbstractTransfer): ProductAbstractTransfer
     {
         return $this->getFactory()
-            ->createBrandProductWriter()
+            ->createBrandProductAbstractRelationWriter()
             ->saveProductAbstractBrand($productAbstractTransfer);
     }
 
