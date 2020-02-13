@@ -5,6 +5,7 @@ namespace FondOfSpryker\Zed\BrandProduct\Persistence;
 use Generated\Shared\Transfer\BrandCollectionTransfer;
 use Generated\Shared\Transfer\BrandProductAbstractRelationTransfer;
 use Generated\Shared\Transfer\BrandTransfer;
+use Orm\Zed\BrandProduct\Persistence\Map\FosBrandProductTableMap;
 use Spryker\Zed\Kernel\Persistence\AbstractRepository;
 
 /**
@@ -85,5 +86,21 @@ class BrandProductRepository extends AbstractRepository implements BrandProductR
         return (new BrandProductAbstractRelationTransfer())
             ->setIdBrand($idBrand)
             ->setProductAbstractIds($productAbstractIds);
+    }
+
+    /**
+     * @param int $idBrand
+     *
+     * @return int[]
+     */
+    public function getRelatedProductAbstractIdsByIdBrand(int $idBrand): array
+    {
+        $brandProductQuery = $this->getFactory()
+            ->createBrandProductQuery()
+            ->select(FosBrandProductTableMap::COL_FK_PRODUCT_ABSTRACT);
+
+        return $brandProductQuery
+            ->findByFkBrand($idBrand)
+            ->toArray();
     }
 }

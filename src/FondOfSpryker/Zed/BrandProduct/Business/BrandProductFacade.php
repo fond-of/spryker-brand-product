@@ -3,6 +3,8 @@
 namespace FondOfSpryker\Zed\BrandProduct\Business;
 
 use Generated\Shared\Transfer\BrandCollectionTransfer;
+use Generated\Shared\Transfer\BrandResponseTransfer;
+use Generated\Shared\Transfer\BrandTransfer;
 use Generated\Shared\Transfer\ProductAbstractTransfer;
 use Spryker\Zed\Kernel\Business\AbstractFacade;
 
@@ -46,5 +48,46 @@ class BrandProductFacade extends AbstractFacade implements BrandProductFacadeInt
         return $this->getFactory()
             ->createBrandProductWriter()
             ->saveProductAbstractBrand($productAbstractTransfer);
+    }
+
+    /**
+     * @param \Generated\Shared\Transfer\BrandTransfer $brandTransfer
+     *
+     * @return \Generated\Shared\Transfer\BrandTransfer
+     */
+    public function expandBrandTransferWithProductAbstractRelation(BrandTransfer $brandTransfer): BrandTransfer
+    {
+        return $this->getFactory()
+            ->createBrandExpander()
+            ->expandBrandTransferWithProductAbstractRelation($brandTransfer);
+    }
+
+    /**
+     * {@inheritDoc}
+     *
+     * @api
+     *
+     * @param \Generated\Shared\Transfer\BrandTransfer $brandTransfer
+     * @return \Generated\Shared\Transfer\BrandTransfer
+     */
+    public function saveBrandProductAbstractRelation(BrandTransfer $brandTransfer): BrandTransfer
+    {
+        return $this->getFactory()->createBrandProductAbstractRelationWriter()
+            ->saveBrandProductAbstractRelation($brandTransfer);
+    }
+
+    /**
+     *
+     * {@inheritDoc}
+     *
+     * @api
+     *
+     * @param \Generated\Shared\Transfer\BrandTransfer $brandTransfer
+     * @return \FondOfSpryker\Zed\BrandCompany\Business\BrandResponseTransfer
+     */
+    public function deleteBrandProductAbstractRelation(BrandTransfer $brandTransfer): BrandResponseTransfer
+    {
+        return $this->getFactory()->createBrandProductAbstractRelationWriter()
+            ->deleteBrandProductAbstractRelation($brandTransfer);
     }
 }

@@ -5,7 +5,7 @@ namespace FondOfSpryker\Zed\BrandProduct\Business;
 use Codeception\Test\Unit;
 use FondOfSpryker\Zed\BrandProduct\Business\Model\BrandExpander;
 use FondOfSpryker\Zed\BrandProduct\Business\Model\BrandReader;
-use FondOfSpryker\Zed\BrandProduct\Business\Model\BrandProductWriter;
+use FondOfSpryker\Zed\BrandProduct\Business\Model\BrandProductAbstractRelationWriter;
 use FondOfSpryker\Zed\BrandProduct\Business\Model\ProductExpander;
 use Generated\Shared\Transfer\BrandCollectionTransfer;
 use Generated\Shared\Transfer\BrandTransfer;
@@ -125,7 +125,7 @@ class BrandProductFacadeTest extends Unit
             ->disableOriginalConstructor()
             ->getMock();
 
-        $writerMock = $this->getMockBuilder(BrandProductWriter::class)
+        $writerMock = $this->getMockBuilder(BrandProductAbstractRelationWriter::class)
             ->disableOriginalConstructor()
             ->getMock();
 

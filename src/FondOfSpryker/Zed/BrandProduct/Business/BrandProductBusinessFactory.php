@@ -4,10 +4,12 @@ namespace FondOfSpryker\Zed\BrandProduct\Business;
 
 use FondOfSpryker\Zed\Brand\Business\BrandFacadeInterface;
 use FondOfSpryker\Zed\BrandProduct\BrandProductDependencyProvider;
-use FondOfSpryker\Zed\BrandProduct\Business\Model\BrandProductWriter;
-use FondOfSpryker\Zed\BrandProduct\Business\Model\BrandProductWriterInterface;
-use FondOfSpryker\Zed\BrandProduct\Business\Model\BrandReader;
-use FondOfSpryker\Zed\BrandProduct\Business\Model\BrandReaderInterface;
+use FondOfSpryker\Zed\BrandProduct\Business\Expander\BrandExpander;
+use FondOfSpryker\Zed\BrandProduct\Business\Expander\BrandExpanderInterface;
+use FondOfSpryker\Zed\BrandProduct\Business\Model\BrandProductAbstractRelationReader;
+use FondOfSpryker\Zed\BrandProduct\Business\Model\BrandProductAbstractRelationReaderInterface;
+use FondOfSpryker\Zed\BrandProduct\Business\Model\BrandProductAbstractRelationWriter;
+use FondOfSpryker\Zed\BrandProduct\Business\Model\BrandProductAbstractRelationWriterInterface;
 use Spryker\Zed\Kernel\Business\AbstractBusinessFactory;
 
 /**
@@ -18,22 +20,22 @@ use Spryker\Zed\Kernel\Business\AbstractBusinessFactory;
 class BrandProductBusinessFactory extends AbstractBusinessFactory
 {
     /**
-     * @return \FondOfSpryker\Zed\BrandProduct\Business\Model\BrandReaderInterface
+     * @return \FondOfSpryker\Zed\BrandProduct\Business\Model\BrandProductAbstractRelationReaderInterface
      */
-    public function createBrandReader(): BrandReaderInterface
+    public function createBrandProductAbstractRelationReader(): BrandProductAbstractRelationReaderInterface
     {
-        return new BrandReader($this->getRepository());
+        return new BrandProductAbstractRelationReader($this->getRepository());
     }
 
     /**
-     * @return \FondOfSpryker\Zed\BrandProduct\Business\Model\BrandProductWriterInterface
+     * @return \FondOfSpryker\Zed\BrandProduct\Business\Model\BrandProductAbstractRelationWriterInterface
      */
-    public function createBrandProductWriter(): BrandProductWriterInterface
+    public function createBrandProductAbstractRelationWriter(): BrandProductAbstractRelationWriterInterface
     {
-        return new BrandProductWriter(
+        return new BrandProductAbstractRelationWriter(
             $this->getEntityManager(),
             $this->getBrandFacade(),
-            $this->createBrandReader(),
+            $this->createBrandProductAbstractRelationReader(),
             $this->getConfig()
         );
     }
@@ -44,5 +46,13 @@ class BrandProductBusinessFactory extends AbstractBusinessFactory
     protected function getBrandFacade(): BrandFacadeInterface
     {
         return $this->getProvidedDependency(BrandProductDependencyProvider::FACADE_BRAND);
+    }
+
+    /**
+     * @return \FondOfSpryker\Zed\BrandProduct\Business\Expander\BrandExpanderInterface
+     */
+    public function createBrandExpander(): BrandExpanderInterface
+    {
+        return new BrandExpander($this->createBrandProductAbstractRelationReader());
     }
 }

@@ -2,8 +2,8 @@
 
 namespace FondOfSpryker\Zed\BrandProduct\Persistence;
 
-use Generated\Shared\Transfer\BrandProductAbstractRelationTransfer;
 use Generated\Shared\Transfer\BrandProductTransfer;
+use Generated\Shared\Transfer\BrandTransfer;
 
 interface BrandProductEntityManagerInterface
 {
@@ -34,4 +34,23 @@ interface BrandProductEntityManagerInterface
      * @return void
      */
     public function deleteBrandProductRelations(int $idProductAbstract, array $brandIds): void;
+
+    /**
+     * @param int $idBrand
+     * @param array $productAbstractIds
+     */
+    public function addProductAbstractRelations(int $idBrand, array $productAbstractIds): void;
+
+    /**
+     * @param int $idBrand
+     * @param int[] $productAbstractIds
+     *
+     * @return void
+     */
+    public function removeProductAbstractRelations(int $idBrand, array $productAbstractIds): void;
+
+    /**
+     * @param \Generated\Shared\Transfer\BrandTransfer $brandTransfer
+     */
+    public function deleteBrandProductAbstractRelation(BrandTransfer $brandTransfer): void;
 }

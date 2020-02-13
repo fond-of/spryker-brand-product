@@ -28,4 +28,11 @@ interface BrandProductRepositoryInterface
      * @return \Generated\Shared\Transfer\BrandProductAbstractRelationTransfer
      */
     public function getProductAbstractCollectionByBrandId(int $idBrand): BrandProductAbstractRelationTransfer;
+
+    /**
+     * @param int $idBrand
+     *
+     * @return int[]
+     */
+    public function getRelatedProductAbstractIdsByIdBrand(int $idBrand): array;
 }
