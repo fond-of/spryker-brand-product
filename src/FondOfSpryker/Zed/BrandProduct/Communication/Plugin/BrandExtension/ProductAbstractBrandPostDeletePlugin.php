@@ -8,8 +8,8 @@ use Generated\Shared\Transfer\BrandTransfer;
 use Spryker\Zed\Kernel\Communication\AbstractPlugin;
 
 /**
- * @method \FondOfSpryker\Zed\BrandCompany\Business\BrandCompanyFacadeInterface getFacade()
- * @method \FondOfSpryker\Zed\BrandCompany\BrandCompanyConfig getConfig()
+ * @method \FondOfSpryker\Zed\BrandProduct\Business\BrandProductFacadeInterface getFacade()
+ * @method \FondOfSpryker\Zed\BrandProduct\BrandProductConfig getConfig()
  */
 class ProductAbstractBrandPostDeletePlugin extends AbstractPlugin implements BrandPostDeletePluginInterface
 {
