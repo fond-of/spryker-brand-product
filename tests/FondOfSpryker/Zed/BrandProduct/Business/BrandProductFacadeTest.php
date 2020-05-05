@@ -3,11 +3,11 @@
 namespace FondOfSpryker\Zed\BrandProduct\Business;
 
 use Codeception\Test\Unit;
-use FondOfSpryker\Zed\BrandProduct\Business\Model\BrandExpander;
-use FondOfSpryker\Zed\BrandProduct\Business\Model\BrandReader;
-use FondOfSpryker\Zed\BrandProduct\Business\Model\BrandProductAbstractRelationWriter;
-use FondOfSpryker\Zed\BrandProduct\Business\Model\ProductExpander;
+use FondOfSpryker\Zed\BrandProduct\Business\Expander\BrandExpanderInterface;
+use FondOfSpryker\Zed\BrandProduct\Business\Model\BrandProductAbstractRelationReaderInterface;
+use FondOfSpryker\Zed\BrandProduct\Business\Model\BrandProductAbstractRelationWriterInterface;
 use Generated\Shared\Transfer\BrandCollectionTransfer;
+use Generated\Shared\Transfer\BrandResponseTransfer;
 use Generated\Shared\Transfer\BrandTransfer;
 use Generated\Shared\Transfer\ProductAbstractTransfer;
 
@@ -17,6 +17,41 @@ class BrandProductFacadeTest extends Unit
      * @var \FondOfSpryker\Zed\BrandProduct\Business\BrandProductBusinessFactory|\PHPUnit\Framework\MockObject\MockObject
      */
     protected $brandProductBusinessFactoryMock;
+
+    /**
+     * @var \PHPUnit\Framework\MockObject\MockObject|\FondOfSpryker\Zed\BrandProduct\Business\Model\BrandProductAbstractRelationReaderInterface
+     */
+    protected $brandProductAbstractRelationReaderMock;
+
+    /**
+     * @var \PHPUnit\Framework\MockObject\MockObject|\FondOfSpryker\Zed\BrandProduct\Business\Model\BrandProductAbstractRelationWriterInterface
+     */
+    protected $brandProductAbstractRelationWriterMock;
+
+    /**
+     * @var \PHPUnit\Framework\MockObject\MockObject|\FondOfSpryker\Zed\BrandProduct\Business\Expander\BrandExpanderInterface
+     */
+    protected $brandExpanderMock;
+
+    /**
+     * @var \PHPUnit\Framework\MockObject\MockObject|\Generated\Shared\Transfer\BrandCollectionTransfer
+     */
+    protected $brandCollectionTransferMock;
+
+    /**
+     * @var \PHPUnit\Framework\MockObject\MockObject|\Generated\Shared\Transfer\ProductAbstractTransfer
+     */
+    protected $productAbstractTransferMock;
+
+    /**
+     * @var \PHPUnit\Framework\MockObject\MockObject|\Generated\Shared\Transfer\BrandTransfer
+     */
+    protected $brandTransferMock;
+
+    /**
+     * @var \PHPUnit\Framework\MockObject\MockObject|\Generated\Shared\Transfer\BrandResponseTransfer
+     */
+    protected $brandResponseTransferMock;
 
     /**
      * @var \FondOfSpryker\Zed\BrandProduct\Business\BrandProductFacadeInterface
@@ -34,6 +69,34 @@ class BrandProductFacadeTest extends Unit
             ->disableOriginalConstructor()
             ->getMock();
 
+        $this->brandProductAbstractRelationReaderMock = $this->getMockBuilder(BrandProductAbstractRelationReaderInterface::class)
+            ->disableOriginalConstructor()
+            ->getMock();
+
+        $this->brandProductAbstractRelationWriterMock = $this->getMockBuilder(BrandProductAbstractRelationWriterInterface::class)
+            ->disableOriginalConstructor()
+            ->getMock();
+
+        $this->brandExpanderMock = $this->getMockBuilder(BrandExpanderInterface::class)
+            ->disableOriginalConstructor()
+            ->getMock();
+
+        $this->brandCollectionTransferMock = $this->getMockBuilder(BrandCollectionTransfer::class)
+            ->disableOriginalConstructor()
+            ->getMock();
+
+        $this->productAbstractTransferMock = $this->getMockBuilder(ProductAbstractTransfer::class)
+            ->disableOriginalConstructor()
+            ->getMock();
+
+        $this->brandTransferMock = $this->getMockBuilder(BrandTransfer::class)
+            ->disableOriginalConstructor()
+            ->getMock();
+
+        $this->brandResponseTransferMock = $this->getMockBuilder(BrandResponseTransfer::class)
+            ->disableOriginalConstructor()
+            ->getMock();
+
         $this->brandProductFacade = new BrandProductFacade();
         $this->brandProductFacade->setFactory($this->brandProductBusinessFactoryMock);
     }
@@ -41,104 +104,102 @@ class BrandProductFacadeTest extends Unit
     /**
      * @return void
      */
-    public function testExpandBrandTransferWithProductAbstractRelations(): void
+    public function testGetBrandsByProductAbstractId(): void
     {
-        $brandTransferMock = $this->getMockBuilder(BrandTransfer::class)
-            ->disableOriginalConstructor()
-            ->getMock();
+        $this->brandProductBusinessFactoryMock->expects($this->atLeastOnce())
+            ->method('createBrandProductAbstractRelationReader')
+            ->willReturn($this->brandProductAbstractRelationReaderMock);
 
-        $brandExpanderMock = $this->getMockBuilder(BrandExpander::class)
-            ->disableOriginalConstructor()
-            ->getMock();
+        $this->brandProductAbstractRelationReaderMock->expects($this->atLeastOnce())
+            ->method('getBrandCollectionByIdProductAbstractId')
+            ->willReturn($this->brandCollectionTransferMock);
 
+        $brandCollectionTransfer = $this->brandProductFacade->getBrandsByProductAbstractId(1);
+
+        $this->assertEquals($this->brandCollectionTransferMock, $brandCollectionTransfer);
+    }
+
+    /**
+     * @return void
+     */
+    public function testSaveProductAbstractBrand(): void
+    {
+        $this->brandProductBusinessFactoryMock->expects($this->atLeastOnce())
+            ->method('createBrandProductAbstractRelationWriter')
+            ->willReturn($this->brandProductAbstractRelationWriterMock);
+
+        $this->brandProductAbstractRelationWriterMock->expects($this->atLeastOnce())
+            ->method('saveProductAbstractBrand')
+            ->with($this->productAbstractTransferMock)
+            ->willReturn($this->productAbstractTransferMock);
+
+        $productAbstractTransfer = $this->brandProductFacade->saveProductAbstractBrand(
+            $this->productAbstractTransferMock
+        );
+
+        $this->assertEquals($this->productAbstractTransferMock, $productAbstractTransfer);
+    }
+
+    /**
+     * @return void
+     */
+    public function testExpandBrandTransferWithProductAbstractRelation(): void
+    {
         $this->brandProductBusinessFactoryMock->expects($this->atLeastOnce())
             ->method('createBrandExpander')
-            ->willReturn($brandExpanderMock);
+            ->willReturn($this->brandExpanderMock);
 
-        $brandExpanderMock->expects($this->atLeastOnce())
-            ->method('expandBrandTransferWithProductAbstractRelations')
-            ->willReturn($brandTransferMock);
+        $this->brandExpanderMock->expects($this->atLeastOnce())
+            ->method('expandBrandTransferWithProductAbstractRelation')
+            ->with($this->brandTransferMock)
+            ->willReturn($this->brandTransferMock);
 
-        $actualProductAbstractTransfer = $this->brandProductFacade->expandBrandTransferWithProductAbstractRelations($brandTransferMock);
+        $brandTransfer = $this->brandProductFacade->expandBrandTransferWithProductAbstractRelation(
+            $this->brandTransferMock
+        );
 
-        $this->assertEquals($brandTransferMock, $actualProductAbstractTransfer);
+        $this->assertEquals($this->brandTransferMock, $brandTransfer);
     }
 
     /**
      * @return void
      */
-    public function testExpandProductAbstractTransferWithBrand(): void
+    public function testSaveBrandProductAbstractRelation(): void
     {
-        $productAbstractTransferMock = $this->getMockBuilder(ProductAbstractTransfer::class)
-            ->disableOriginalConstructor()
-            ->getMock();
-
-        $productExpanderMock = $this->getMockBuilder(ProductExpander::class)
-            ->disableOriginalConstructor()
-            ->getMock();
-
         $this->brandProductBusinessFactoryMock->expects($this->atLeastOnce())
-            ->method('createProductExpander')
-            ->willReturn($productExpanderMock);
+            ->method('createBrandProductAbstractRelationWriter')
+            ->willReturn($this->brandProductAbstractRelationWriterMock);
 
-        $productExpanderMock->expects($this->atLeastOnce())
-            ->method('expandProductAbstractTransferWithBrand')
-            ->willReturn($productAbstractTransferMock);
+        $this->brandProductAbstractRelationWriterMock->expects($this->atLeastOnce())
+            ->method('saveBrandProductAbstractRelation')
+            ->with($this->brandTransferMock)
+            ->willReturn($this->brandTransferMock);
 
-        $actualProductAbstractTransfer = $this->brandProductFacade->expandProductAbstractTransferWithBrand($productAbstractTransferMock);
+        $brandTransfer = $this->brandProductFacade->saveBrandProductAbstractRelation(
+            $this->brandTransferMock
+        );
 
-        $this->assertEquals($productAbstractTransferMock, $actualProductAbstractTransfer);
+        $this->assertEquals($this->brandTransferMock, $brandTransfer);
     }
 
     /**
      * @return void
      */
-    public function testGetBrandsByProductAbstractId()
+    public function testDeleteBrandProductAbstractRelation(): void
     {
-        $brandCollectionTransferMock = $this->getMockBuilder(BrandCollectionTransfer::class)
-            ->disableOriginalConstructor()
-            ->getMock();
-
-        $readerMock = $this->getMockBuilder(BrandReader::class)
-            ->disableOriginalConstructor()
-            ->getMock();
-
-        $readerMock->expects($this->atLeastOnce())
-            ->method('getBrandCollectionByIdProductAbstractId')
-            ->willReturn($brandCollectionTransferMock);
-
         $this->brandProductBusinessFactoryMock->expects($this->atLeastOnce())
-            ->method('createBrandReader')
-            ->willReturn($readerMock);
+            ->method('createBrandProductAbstractRelationWriter')
+            ->willReturn($this->brandProductAbstractRelationWriterMock);
 
-        $actualBrandCollectionTransfer = $this->brandProductFacade->getBrandsByProductAbstractId(1);
+        $this->brandProductAbstractRelationWriterMock->expects($this->atLeastOnce())
+            ->method('deleteBrandProductAbstractRelation')
+            ->with($this->brandTransferMock)
+            ->willReturn($this->brandResponseTransferMock);
 
-        $this->assertEquals($brandCollectionTransferMock, $actualBrandCollectionTransfer);
-    }
+        $brandResponseTransfer = $this->brandProductFacade->deleteBrandProductAbstractRelation(
+            $this->brandTransferMock
+        );
 
-    /**
-     * @return void
-     */
-    public function testUpdateProductAbstractBrands()
-    {
-        $productAbstractTransferMock = $this->getMockBuilder(ProductAbstractTransfer::class)
-            ->disableOriginalConstructor()
-            ->getMock();
-
-        $writerMock = $this->getMockBuilder(BrandProductAbstractRelationWriter::class)
-            ->disableOriginalConstructor()
-            ->getMock();
-
-        $writerMock->expects($this->atLeastOnce())
-            ->method('updateProductAbstractBrands')
-            ->willReturn($productAbstractTransferMock);
-
-        $this->brandProductBusinessFactoryMock->expects($this->atLeastOnce())
-            ->method('createBrandWriter')
-            ->willReturn($writerMock);
-
-        $actualProductAbstractTransfer = $this->brandProductFacade->updateProductAbstractBrands($productAbstractTransferMock);
-
-        $this->assertEquals($productAbstractTransferMock, $actualProductAbstractTransfer);
+        $this->assertEquals($this->brandResponseTransferMock, $brandResponseTransfer);
     }
 }

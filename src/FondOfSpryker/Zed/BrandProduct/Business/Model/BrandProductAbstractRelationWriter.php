@@ -2,8 +2,8 @@
 
 namespace FondOfSpryker\Zed\BrandProduct\Business\Model;
 
-use FondOfSpryker\Zed\Brand\Business\BrandFacadeInterface;
 use FondOfSpryker\Zed\BrandProduct\BrandProductConfig;
+use FondOfSpryker\Zed\BrandProduct\Dependency\Facade\BrandProductToBrandFacadeInterface;
 use FondOfSpryker\Zed\BrandProduct\Persistence\BrandProductEntityManagerInterface;
 use Generated\Shared\Transfer\BrandProductAbstractRelationTransfer;
 use Generated\Shared\Transfer\BrandProductTransfer;
@@ -25,7 +25,7 @@ class BrandProductAbstractRelationWriter implements BrandProductAbstractRelation
     protected $brandProductEntityManager;
 
     /**
-     * @var \FondOfSpryker\Zed\Brand\Business\BrandFacadeInterface
+     * @var \FondOfSpryker\Zed\BrandProduct\Dependency\Facade\BrandProductToBrandFacadeInterface
      */
     protected $brandFacade;
 
@@ -41,13 +41,13 @@ class BrandProductAbstractRelationWriter implements BrandProductAbstractRelation
 
     /**
      * @param \FondOfSpryker\Zed\BrandProduct\Persistence\BrandProductEntityManagerInterface $brandProductEntityManager
-     * @param \FondOfSpryker\Zed\Brand\Business\BrandFacadeInterface $brandFacade
+     * @param \FondOfSpryker\Zed\BrandProduct\Dependency\Facade\BrandProductToBrandFacadeInterface $brandFacade
      * @param \FondOfSpryker\Zed\BrandProduct\Business\Model\BrandProductAbstractRelationReaderInterface $brandProductAbstractRelationReader
      * @param \FondOfSpryker\Zed\BrandProduct\BrandProductConfig $config
      */
     public function __construct(
         BrandProductEntityManagerInterface $brandProductEntityManager,
-        BrandFacadeInterface $brandFacade,
+        BrandProductToBrandFacadeInterface $brandFacade,
         BrandProductAbstractRelationReaderInterface $brandProductAbstractRelationReader,
         BrandProductConfig $config
     ) {
@@ -146,6 +146,7 @@ class BrandProductAbstractRelationWriter implements BrandProductAbstractRelation
 
     /**
      * @param \Generated\Shared\Transfer\BrandTransfer $brandTransfer
+     * @param \Generated\Shared\Transfer\BrandResponseTransfer $brandResponseTransfer
      *
      * @return \Generated\Shared\Transfer\BrandResponseTransfer
      */
@@ -153,7 +154,6 @@ class BrandProductAbstractRelationWriter implements BrandProductAbstractRelation
         BrandTransfer $brandTransfer,
         BrandResponseTransfer $brandResponseTransfer
     ): BrandResponseTransfer {
-
         $this->brandProductEntityManager->deleteBrandProductAbstractRelation($brandTransfer);
 
         $brandResponseTransfer->addMessage(
@@ -171,8 +171,8 @@ class BrandProductAbstractRelationWriter implements BrandProductAbstractRelation
     protected function getRelatedProductAbstractIds(
         BrandProductAbstractRelationTransfer $brandProductAbstractRelationTransfer
     ): array {
-        $currentBrandProductAbstractRelationTransfer =
-            $this->brandProductAbstractRelationReader->getBrandProductAbstractRelation($brandProductAbstractRelationTransfer);
+        $currentBrandProductAbstractRelationTransfer = $this->brandProductAbstractRelationReader
+            ->getBrandProductAbstractRelation($brandProductAbstractRelationTransfer);
 
         if (!$currentBrandProductAbstractRelationTransfer->getProductAbstractIds()) {
             return [];
@@ -182,7 +182,7 @@ class BrandProductAbstractRelationWriter implements BrandProductAbstractRelation
     }
 
     /**
-     * @param \Generated\Shared\Transfer\BrandCompanyRelationTransfer $brandCompanyRelationTransfer
+     * @param \Generated\Shared\Transfer\BrandProductAbstractRelationTransfer $brandProductAbstractRelationTransfer
      *
      * @return array
      */

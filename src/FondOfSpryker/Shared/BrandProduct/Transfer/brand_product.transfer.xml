@@ -27,5 +27,4 @@
     <transfer name="Brand">
         <property name="name" type="string" />
     </transfer>
-
 </transfers>

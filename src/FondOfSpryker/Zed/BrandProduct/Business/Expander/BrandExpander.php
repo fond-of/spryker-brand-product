@@ -28,7 +28,9 @@ class BrandExpander implements BrandExpanderInterface
      */
     public function expandBrandTransferWithProductAbstractRelation(BrandTransfer $brandTransfer): BrandTransfer
     {
-        $brandProductAbstractRelationTransfer = (new BrandProductAbstractRelationTransfer())->setIdBrand($brandTransfer->getIdBrand());
+        $brandProductAbstractRelationTransfer = (new BrandProductAbstractRelationTransfer())
+            ->setIdBrand($brandTransfer->getIdBrand());
+
         $brandTransfer->setBrandProductAbstractRelation($brandProductAbstractRelationTransfer);
 
         $brandProductAbstractRelationTransfer = $this->brandProductAbstractRelationReader

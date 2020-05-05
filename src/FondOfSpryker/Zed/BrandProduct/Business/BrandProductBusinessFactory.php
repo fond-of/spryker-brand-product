@@ -2,7 +2,6 @@
 
 namespace FondOfSpryker\Zed\BrandProduct\Business;
 
-use FondOfSpryker\Zed\Brand\Business\BrandFacadeInterface;
 use FondOfSpryker\Zed\BrandProduct\BrandProductDependencyProvider;
 use FondOfSpryker\Zed\BrandProduct\Business\Expander\BrandExpander;
 use FondOfSpryker\Zed\BrandProduct\Business\Expander\BrandExpanderInterface;
@@ -10,6 +9,7 @@ use FondOfSpryker\Zed\BrandProduct\Business\Model\BrandProductAbstractRelationRe
 use FondOfSpryker\Zed\BrandProduct\Business\Model\BrandProductAbstractRelationReaderInterface;
 use FondOfSpryker\Zed\BrandProduct\Business\Model\BrandProductAbstractRelationWriter;
 use FondOfSpryker\Zed\BrandProduct\Business\Model\BrandProductAbstractRelationWriterInterface;
+use FondOfSpryker\Zed\BrandProduct\Dependency\Facade\BrandProductToBrandFacadeInterface;
 use Spryker\Zed\Kernel\Business\AbstractBusinessFactory;
 
 /**
@@ -41,9 +41,9 @@ class BrandProductBusinessFactory extends AbstractBusinessFactory
     }
 
     /**
-     * @return \FondOfSpryker\Zed\Brand\Business\BrandFacadeInterface
+     * @return \FondOfSpryker\Zed\BrandProduct\Dependency\Facade\BrandProductToBrandFacadeInterface
      */
-    protected function getBrandFacade(): BrandFacadeInterface
+    protected function getBrandFacade(): BrandProductToBrandFacadeInterface
     {
         return $this->getProvidedDependency(BrandProductDependencyProvider::FACADE_BRAND);
     }

@@ -1,6 +1,6 @@
 <?php
 
-namespace FondOfSpryker\Zed\BrandProduct\Communication\Plugin;
+namespace FondOfSpryker\Zed\BrandProduct\Communication\Plugin\Product;
 
 use Generated\Shared\Transfer\ProductAbstractTransfer;
 use Spryker\Zed\Kernel\Communication\AbstractPlugin;
@@ -8,9 +8,9 @@ use Spryker\Zed\Product\Dependency\Plugin\ProductAbstractPluginUpdateInterface;
 
 /**
  * @method \FondOfSpryker\Zed\BrandProduct\Business\BrandProductFacadeInterface getFacade()
-
+ * @method \FondOfSpryker\Zed\BrandProduct\BrandProductConfig getConfig()
  */
-class ProductAbstractAfterUpdatePlugin extends AbstractPlugin implements ProductAbstractPluginUpdateInterface
+class BrandProductAbstractAfterUpdatePlugin extends AbstractPlugin implements ProductAbstractPluginUpdateInterface
 {
     /**
      * @param \Generated\Shared\Transfer\ProductAbstractTransfer $productAbstractTransfer

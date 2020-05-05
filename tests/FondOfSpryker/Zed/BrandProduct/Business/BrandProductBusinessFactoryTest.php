@@ -3,29 +3,47 @@
 namespace FondOfSpryker\Zed\BrandProduct\Business;
 
 use Codeception\Test\Unit;
-use FondOfSpryker\Zed\BrandProduct\Business\Model\BrandExpanderInterface;
-use FondOfSpryker\Zed\BrandProduct\Business\Model\BrandReaderInterface;
-use FondOfSpryker\Zed\BrandProduct\Business\Model\BrandWriterInterface;
-use FondOfSpryker\Zed\BrandProduct\Business\Model\ProductExpanderInterface;
+use FondOfSpryker\Zed\BrandProduct\BrandProductConfig;
+use FondOfSpryker\Zed\BrandProduct\BrandProductDependencyProvider;
+use FondOfSpryker\Zed\BrandProduct\Business\Expander\BrandExpander;
+use FondOfSpryker\Zed\BrandProduct\Business\Model\BrandProductAbstractRelationReader;
+use FondOfSpryker\Zed\BrandProduct\Business\Model\BrandProductAbstractRelationWriter;
+use FondOfSpryker\Zed\BrandProduct\Dependency\Facade\BrandProductToBrandFacadeInterface;
 use FondOfSpryker\Zed\BrandProduct\Persistence\BrandProductEntityManager;
 use FondOfSpryker\Zed\BrandProduct\Persistence\BrandProductRepository;
+use Spryker\Zed\Kernel\Container;
 
 class BrandProductBusinessFactoryTest extends Unit
 {
     /**
-     * @var \FondOfSpryker\Zed\BrandProduct\Business\BrandProductBusinessFactory
+     * @var \PHPUnit\Framework\MockObject\MockObject|\Spryker\Zed\Kernel\Container
      */
-    protected $brandProductBusinessFactory;
+    protected $containerMock;
 
     /**
-     * @var \FondOfSpryker\Zed\BrandProduct\Persistence\BrandProductRepository
+     * @var \PHPUnit\Framework\MockObject\MockObject|\FondOfSpryker\Zed\BrandProduct\Dependency\Facade\BrandProductToBrandFacadeInterface
+     */
+    protected $brandFacadeMock;
+
+    /**
+     * @var \PHPUnit\Framework\MockObject\MockObject|\FondOfSpryker\Zed\BrandProduct\BrandProductConfig
+     */
+    protected $configMock;
+
+    /**
+     * @var \PHPUnit\Framework\MockObject\MockObject|\FondOfSpryker\Zed\BrandProduct\Persistence\BrandProductRepository
      */
     protected $repositoryMock;
 
     /**
-     * @var \FondOfSpryker\Zed\BrandProduct\Persistence\BrandProductEntityManager
+     * @var \PHPUnit\Framework\MockObject\MockObject|\FondOfSpryker\Zed\BrandProduct\Persistence\BrandProductEntityManager
      */
     protected $entityManagerMock;
+
+    /**
+     * @var \FondOfSpryker\Zed\BrandProduct\Business\BrandProductBusinessFactory
+     */
+    protected $brandProductBusinessFactory;
 
     /**
      * @return void
@@ -33,6 +51,18 @@ class BrandProductBusinessFactoryTest extends Unit
     protected function _before(): void
     {
         parent::_before();
+
+        $this->containerMock = $this->getMockBuilder(Container::class)
+            ->disableOriginalConstructor()
+            ->getMock();
+
+        $this->brandFacadeMock = $this->getMockBuilder(BrandProductToBrandFacadeInterface::class)
+            ->disableOriginalConstructor()
+            ->getMock();
+
+        $this->configMock = $this->getMockBuilder(BrandProductConfig::class)
+            ->disableOriginalConstructor()
+            ->getMock();
 
         $this->repositoryMock = $this->getMockBuilder(BrandProductRepository::class)
             ->disableOriginalConstructor()
@@ -43,35 +73,41 @@ class BrandProductBusinessFactoryTest extends Unit
             ->getMock();
 
         $this->brandProductBusinessFactory = new BrandProductBusinessFactory();
+        $this->brandProductBusinessFactory->setContainer($this->containerMock);
         $this->brandProductBusinessFactory->setRepository($this->repositoryMock);
         $this->brandProductBusinessFactory->setEntityManager($this->entityManagerMock);
+        $this->brandProductBusinessFactory->setConfig($this->configMock);
     }
 
     /**
      * @return void
      */
-    public function testCreateBrandWriter(): void
+    public function testCreateBrandProductAbstractRelationReader(): void
     {
-        $service = $this->brandProductBusinessFactory->createBrandWriter();
-        $this->assertInstanceOf(BrandWriterInterface::class, $service);
+        $brandProductAbstractRelationReader = $this->brandProductBusinessFactory
+            ->createBrandProductAbstractRelationReader();
+
+        $this->assertInstanceOf(BrandProductAbstractRelationReader::class, $brandProductAbstractRelationReader);
     }
 
     /**
      * @return void
      */
-    public function testCreateBrandReader(): void
+    public function testCreateBrandProductAbstractRelationWriter(): void
     {
-        $service = $this->brandProductBusinessFactory->createBrandReader();
-        $this->assertInstanceOf(BrandReaderInterface::class, $service);
-    }
+        $this->containerMock->expects($this->atLeastOnce())
+            ->method('has')
+            ->willReturn(true);
 
-    /**
-     * @return void
-     */
-    public function testCreateProductExpander(): void
-    {
-        $service = $this->brandProductBusinessFactory->createProductExpander();
-        $this->assertInstanceOf(ProductExpanderInterface::class, $service);
+        $this->containerMock->expects($this->atLeastOnce())
+            ->method('get')
+            ->with(BrandProductDependencyProvider::FACADE_BRAND)
+            ->willReturn($this->brandFacadeMock);
+
+        $brandProductAbstractRelationWriter = $this->brandProductBusinessFactory
+            ->createBrandProductAbstractRelationWriter();
+
+        $this->assertInstanceOf(BrandProductAbstractRelationWriter::class, $brandProductAbstractRelationWriter);
     }
 
     /**
@@ -79,7 +115,8 @@ class BrandProductBusinessFactoryTest extends Unit
      */
     public function testCreateBrandExpander(): void
     {
-        $service = $this->brandProductBusinessFactory->createBrandExpander();
-        $this->assertInstanceOf(BrandExpanderInterface::class, $service);
+        $brandExpander = $this->brandProductBusinessFactory->createBrandExpander();
+
+        $this->assertInstanceOf(BrandExpander::class, $brandExpander);
     }
 }
