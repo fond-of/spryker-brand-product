@@ -42,7 +42,7 @@ class BrandProductAbstractRelationReader implements BrandProductAbstractRelation
     }
 
     /**
-     * @param \Generated\Shared\Transfer\ProductAbstractTransfer $productTransfer
+     * @param \Generated\Shared\Transfer\ProductAbstractTransfer $productAbstractTransfer
      *
      * @return \Generated\Shared\Transfer\BrandCollectionTransfer
      */

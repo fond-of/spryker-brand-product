@@ -20,7 +20,7 @@ class ProductAbstractBrandPostDeletePlugin extends AbstractPlugin implements Bra
      *
      * @param \Generated\Shared\Transfer\BrandTransfer $brandTransfer
      *
-     * @return \Generated\Shared\Transfer\BrandTransfer
+     * @return \Generated\Shared\Transfer\BrandResponseTransfer
      */
     public function execute(BrandTransfer $brandTransfer): BrandResponseTransfer
     {

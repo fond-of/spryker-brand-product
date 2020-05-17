@@ -108,7 +108,7 @@ class BrandProductAbstractRelationWriter implements BrandProductAbstractRelation
         $idBrand = $brandTransfer->getIdBrand();
         $brandProductAbstractRelationTransfer = $brandTransfer->getBrandProductAbstractRelation();
 
-        if ($brandProductAbstractRelationTransfer->getIdBrand() == null) {
+        if ($brandProductAbstractRelationTransfer->getIdBrand() === null) {
             $brandProductAbstractRelationTransfer->setIdBrand($idBrand);
         }
 
@@ -199,9 +199,9 @@ class BrandProductAbstractRelationWriter implements BrandProductAbstractRelation
     /**
      * @param string $name
      *
-     * @return \Generated\Shared\Transfer\BrandTransfer
+     * @return \Generated\Shared\Transfer\BrandTransfer|null
      */
-    protected function getBrandIdByBrandName(string $name): BrandTransfer
+    protected function getBrandIdByBrandName(string $name): ?BrandTransfer
     {
         $brandTransfer = (new BrandTransfer())
             ->setName($name);

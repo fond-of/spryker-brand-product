@@ -15,14 +15,11 @@ class BrandProductEntityManager extends AbstractEntityManager implements BrandPr
     /**
      * @param \Generated\Shared\Transfer\BrandProductTransfer $brandProductTransfer
      *
-     * @throws
-     *
      * @return \Generated\Shared\Transfer\BrandProductTransfer
      */
     public function saveBrandProduct(
         BrandProductTransfer $brandProductTransfer
     ): BrandProductTransfer {
-
         $fosBrandProduct = $this->getFactory()
             ->createBrandProductQuery()
             ->filterByFkProductAbstract($brandProductTransfer->getFkProductAbstract())
