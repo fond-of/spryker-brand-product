@@ -19,6 +19,8 @@ interface BrandProductEntityManagerInterface
     /**
      * @param int $idBrand
      * @param array $productAbstractIds
+     *
+     * @return void
      */
     public function addProductAbstractRelations(int $idBrand, array $productAbstractIds): void;
 
@@ -32,6 +34,8 @@ interface BrandProductEntityManagerInterface
 
     /**
      * @param \Generated\Shared\Transfer\BrandTransfer $brandTransfer
+     *
+     * @return void
      */
     public function deleteBrandProductAbstractRelation(BrandTransfer $brandTransfer): void;
 }
