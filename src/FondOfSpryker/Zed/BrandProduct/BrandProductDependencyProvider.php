@@ -2,6 +2,7 @@
 
 namespace FondOfSpryker\Zed\BrandProduct;
 
+use FondOfSpryker\Zed\BrandProduct\Dependency\Facade\BrandProductToBrandFacadeBridge;
 use Orm\Zed\Brand\Persistence\FosBrandQuery;
 use Orm\Zed\BrandProduct\Persistence\FosBrandProductQuery;
 use Spryker\Zed\Kernel\AbstractBundleDependencyProvider;
@@ -12,7 +13,7 @@ class BrandProductDependencyProvider extends AbstractBundleDependencyProvider
     public const PROPEL_QUERY_BRAND = 'PROPEL_QUERY_BRAND';
     public const PROPEL_QUERY_BRAND_PRODUCT = 'PROPEL_QUERY_BRAND_PRODUCT';
 
-    public const FACADE_BRAND = 'facade_brand';
+    public const FACADE_BRAND = 'FACADE_BRAND';
 
     /**
      * @param \Spryker\Zed\Kernel\Container $container
@@ -51,7 +52,7 @@ class BrandProductDependencyProvider extends AbstractBundleDependencyProvider
     protected function addBrandFacade(Container $container): Container
     {
         $container[static::FACADE_BRAND] = static function (Container $container) {
-            return $container->getLocator()->brand()->facade();
+            return new BrandProductToBrandFacadeBridge($container->getLocator()->brand()->facade());
         };
 
         return $container;

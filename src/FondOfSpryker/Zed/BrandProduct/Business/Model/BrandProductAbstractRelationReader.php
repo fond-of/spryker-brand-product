@@ -31,21 +31,28 @@ class BrandProductAbstractRelationReader implements BrandProductAbstractRelation
         BrandProductAbstractRelationTransfer $brandProductAbstractRelationTransfer
     ): BrandProductAbstractRelationTransfer {
         $brandProductAbstractRelationTransfer->requireIdBrand();
-        $productAbstractIds = $this->brandProductRepository->getRelatedProductAbstractIdsByIdBrand($brandProductAbstractRelationTransfer->getIdBrand());
+
+        $productAbstractIds = $this->brandProductRepository->getRelatedProductAbstractIdsByIdBrand(
+            $brandProductAbstractRelationTransfer->getIdBrand()
+        );
+
         $brandProductAbstractRelationTransfer->setProductAbstractIds($productAbstractIds);
 
         return $brandProductAbstractRelationTransfer;
     }
 
     /**
-     * @param \Generated\Shared\Transfer\ProductAbstractTransfer $productTransfer
+     * @param \Generated\Shared\Transfer\ProductAbstractTransfer $productAbstractTransfer
      *
      * @return \Generated\Shared\Transfer\BrandCollectionTransfer
      */
-    public function getBrandCollectionByIdProductAbstractId(ProductAbstractTransfer $productAbstractTransfer): BrandCollectionTransfer
-    {
+    public function getBrandCollectionByIdProductAbstractId(
+        ProductAbstractTransfer $productAbstractTransfer
+    ): BrandCollectionTransfer {
         $productAbstractTransfer->requireIdProductAbstract();
 
-        return $this->brandProductRepository->getBrandCollectionByAbstractIdProduct($productAbstractTransfer->getIdProductAbstract());
+        return $this->brandProductRepository->getBrandCollectionByAbstractIdProduct(
+            $productAbstractTransfer->getIdProductAbstract()
+        );
     }
 }

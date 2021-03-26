@@ -13,11 +13,12 @@ use Spryker\Zed\Kernel\Communication\AbstractPlugin;
 class ProductAbstractBrandPostSavePlugin extends AbstractPlugin implements BrandPostSavePluginInterface
 {
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      *
      * @api
      *
      * @param \Generated\Shared\Transfer\BrandTransfer $brandTransfer
+     *
      * @return \Generated\Shared\Transfer\BrandTransfer
      */
     public function execute(BrandTransfer $brandTransfer): BrandTransfer

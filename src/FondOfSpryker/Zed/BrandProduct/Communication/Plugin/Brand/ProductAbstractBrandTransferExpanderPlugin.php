@@ -7,13 +7,13 @@ use Generated\Shared\Transfer\BrandTransfer;
 use Spryker\Zed\Kernel\Communication\AbstractPlugin;
 
 /**
- * @method \FondOfSpryker\Zed\BrandCompany\Business\BrandCompanyFacadeInterface getFacade()
- * @method \FondOfSpryker\Zed\BrandCompany\BrandCompanyConfig getConfig()
+ * @method \FondOfSpryker\Zed\BrandProduct\BrandProductConfig getConfig()
+ * @method \FondOfSpryker\Zed\BrandProduct\Business\BrandProductFacadeInterface getFacade()
  */
 class ProductAbstractBrandTransferExpanderPlugin extends AbstractPlugin implements BrandTransferExpanderPluginInterface
 {
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      *
      * @api
      *

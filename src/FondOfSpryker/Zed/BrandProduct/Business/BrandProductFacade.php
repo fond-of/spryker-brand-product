@@ -16,7 +16,7 @@ use Spryker\Zed\Kernel\Business\AbstractFacade;
 class BrandProductFacade extends AbstractFacade implements BrandProductFacadeInterface
 {
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      *
      * @api
      *
@@ -35,7 +35,7 @@ class BrandProductFacade extends AbstractFacade implements BrandProductFacadeInt
     }
 
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      *
      * @api
      *
@@ -68,6 +68,7 @@ class BrandProductFacade extends AbstractFacade implements BrandProductFacadeInt
      * @api
      *
      * @param \Generated\Shared\Transfer\BrandTransfer $brandTransfer
+     *
      * @return \Generated\Shared\Transfer\BrandTransfer
      */
     public function saveBrandProductAbstractRelation(BrandTransfer $brandTransfer): BrandTransfer
@@ -77,13 +78,13 @@ class BrandProductFacade extends AbstractFacade implements BrandProductFacadeInt
     }
 
     /**
-     *
      * {@inheritDoc}
      *
      * @api
      *
      * @param \Generated\Shared\Transfer\BrandTransfer $brandTransfer
-     * @return \FondOfSpryker\Zed\BrandCompany\Business\BrandResponseTransfer
+     *
+     * @return \Generated\Shared\Transfer\BrandResponseTransfer
      */
     public function deleteBrandProductAbstractRelation(BrandTransfer $brandTransfer): BrandResponseTransfer
     {
