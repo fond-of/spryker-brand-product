@@ -53,7 +53,7 @@ class BrandProductAbstractAfterUpdatePluginTest extends Unit
             ->willReturn($this->productAbstractTransferMock);
 
         $productAbstractTransfer = $this->brandProductAbstractAfterUpdatePlugin->update(
-            $this->productAbstractTransferMock
+            $this->productAbstractTransferMock,
         );
 
         $this->assertEquals($this->productAbstractTransferMock, $productAbstractTransfer);

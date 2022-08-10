@@ -18,7 +18,7 @@ class BrandProductMapper implements BrandProductMapperInterface
         FosBrandProduct $fosBrandProduct
     ): FosBrandProduct {
         $fosBrandProduct->fromArray(
-            $brandProductTransfer->modifiedToArray(false)
+            $brandProductTransfer->modifiedToArray(false),
         );
 
         return $fosBrandProduct;

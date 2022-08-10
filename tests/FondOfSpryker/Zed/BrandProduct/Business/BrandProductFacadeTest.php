@@ -134,7 +134,7 @@ class BrandProductFacadeTest extends Unit
             ->willReturn($this->productAbstractTransferMock);
 
         $productAbstractTransfer = $this->brandProductFacade->saveProductAbstractBrand(
-            $this->productAbstractTransferMock
+            $this->productAbstractTransferMock,
         );
 
         $this->assertEquals($this->productAbstractTransferMock, $productAbstractTransfer);
@@ -155,7 +155,7 @@ class BrandProductFacadeTest extends Unit
             ->willReturn($this->brandTransferMock);
 
         $brandTransfer = $this->brandProductFacade->expandBrandTransferWithProductAbstractRelation(
-            $this->brandTransferMock
+            $this->brandTransferMock,
         );
 
         $this->assertEquals($this->brandTransferMock, $brandTransfer);
@@ -176,7 +176,7 @@ class BrandProductFacadeTest extends Unit
             ->willReturn($this->brandTransferMock);
 
         $brandTransfer = $this->brandProductFacade->saveBrandProductAbstractRelation(
-            $this->brandTransferMock
+            $this->brandTransferMock,
         );
 
         $this->assertEquals($this->brandTransferMock, $brandTransfer);
@@ -197,7 +197,7 @@ class BrandProductFacadeTest extends Unit
             ->willReturn($this->brandResponseTransferMock);
 
         $brandResponseTransfer = $this->brandProductFacade->deleteBrandProductAbstractRelation(
-            $this->brandTransferMock
+            $this->brandTransferMock,
         );
 
         $this->assertEquals($this->brandResponseTransferMock, $brandResponseTransfer);

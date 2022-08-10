@@ -19,7 +19,7 @@ class BrandProductRepository extends AbstractRepository implements BrandProductR
      */
     public function getBrandCollectionByAbstractIdProduct(int $idProductAbstract): BrandCollectionTransfer
     {
-        /** @var \Orm\Zed\Brand\Persistence\FosBrand[] $brandEntities */
+        /** @var array<\Orm\Zed\Brand\Persistence\FosBrand> $brandEntities */
         $brandEntities = $this->getFactory()
             ->getBrandQuery()
             ->useFosBrandProductQuery()
@@ -32,7 +32,7 @@ class BrandProductRepository extends AbstractRepository implements BrandProductR
 
         foreach ($brandEntities as $brandEntity) {
             $brandCollectionTransfer->addBrand(
-                $brandProductMapper->mapEntityToTransfer($brandEntity, new BrandTransfer())
+                $brandProductMapper->mapEntityToTransfer($brandEntity, new BrandTransfer()),
             );
         }
 
@@ -42,7 +42,7 @@ class BrandProductRepository extends AbstractRepository implements BrandProductR
     /**
      * @param int $idBrand
      *
-     * @return int[]
+     * @return array<int>
      */
     public function getRelatedProductAbstractIdsByIdBrand(int $idBrand): array
     {
@@ -51,7 +51,8 @@ class BrandProductRepository extends AbstractRepository implements BrandProductR
             ->select(FosBrandProductTableMap::COL_FK_PRODUCT_ABSTRACT);
 
         return $brandProductQuery
-            ->findByFkBrand($idBrand)
+            ->filterByFkBrand($idBrand)
+            ->find()
             ->toArray();
     }
 }

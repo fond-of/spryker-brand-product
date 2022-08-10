@@ -16,7 +16,7 @@ interface BrandProductRepositoryInterface
     /**
      * @param int $idBrand
      *
-     * @return int[]
+     * @return array<int>
      */
     public function getRelatedProductAbstractIdsByIdBrand(int $idBrand): array;
 }

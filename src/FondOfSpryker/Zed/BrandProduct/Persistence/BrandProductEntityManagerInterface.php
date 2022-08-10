@@ -26,7 +26,7 @@ interface BrandProductEntityManagerInterface
 
     /**
      * @param int $idBrand
-     * @param int[] $productAbstractIds
+     * @param array<int> $productAbstractIds
      *
      * @return void
      */

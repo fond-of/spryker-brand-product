@@ -8,7 +8,7 @@ use FondOfSpryker\Shared\BrandProduct\BrandProductConstants;
 class BrandProductConfigTest extends Unit
 {
     /**
-     * @var BrandProductConfig|\PHPUnit\Framework\MockObject\MockObject
+     * @var \FondOfSpryker\Zed\BrandProduct\BrandProductConfig|\PHPUnit\Framework\MockObject\MockObject
      */
     protected $brandProductConfigConfig;
 

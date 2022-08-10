@@ -17,6 +17,9 @@ class BrandProductAbstractRelationWriter implements BrandProductAbstractRelation
 {
     use TransactionTrait;
 
+    /**
+     * @var string
+     */
     protected const MESSAGE_BRAND_PRODUCT_DELETE_SUCCESS = 'Brand Product Relation has been successfully removed.';
 
     /**
@@ -122,7 +125,7 @@ class BrandProductAbstractRelationWriter implements BrandProductAbstractRelation
         $this->brandProductEntityManager->removeProductAbstractRelations($idBrand, $deleteProductAbstractIds);
 
         $brandProductAbstractRelationTransfer->setProductAbstractIds(
-            $this->getRelatedProductAbstractIds($brandProductAbstractRelationTransfer)
+            $this->getRelatedProductAbstractIds($brandProductAbstractRelationTransfer),
         );
 
         return $brandTransfer;
@@ -157,7 +160,7 @@ class BrandProductAbstractRelationWriter implements BrandProductAbstractRelation
         $this->brandProductEntityManager->deleteBrandProductAbstractRelation($brandTransfer);
 
         $brandResponseTransfer->addMessage(
-            (new MessageTransfer())->setValue(static::MESSAGE_BRAND_PRODUCT_DELETE_SUCCESS)
+            (new MessageTransfer())->setValue(static::MESSAGE_BRAND_PRODUCT_DELETE_SUCCESS),
         );
 
         return $brandResponseTransfer;
