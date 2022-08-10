@@ -10,9 +10,19 @@ use Spryker\Zed\Kernel\Container;
 
 class BrandProductDependencyProvider extends AbstractBundleDependencyProvider
 {
+    /**
+     * @var string
+     */
     public const PROPEL_QUERY_BRAND = 'PROPEL_QUERY_BRAND';
+
+    /**
+     * @var string
+     */
     public const PROPEL_QUERY_BRAND_PRODUCT = 'PROPEL_QUERY_BRAND_PRODUCT';
 
+    /**
+     * @var string
+     */
     public const FACADE_BRAND = 'FACADE_BRAND';
 
     /**

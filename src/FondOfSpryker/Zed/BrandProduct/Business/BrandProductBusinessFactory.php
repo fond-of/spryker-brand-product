@@ -36,7 +36,7 @@ class BrandProductBusinessFactory extends AbstractBusinessFactory
             $this->getEntityManager(),
             $this->getBrandFacade(),
             $this->createBrandProductAbstractRelationReader(),
-            $this->getConfig()
+            $this->getConfig(),
         );
     }
 

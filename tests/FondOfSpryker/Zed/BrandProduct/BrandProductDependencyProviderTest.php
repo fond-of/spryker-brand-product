@@ -86,7 +86,7 @@ class BrandProductDependencyProviderTest extends Unit
         $this->assertEquals($this->containerMock, $container);
         $this->assertInstanceOf(
             BrandProductToBrandFacadeBridge::class,
-            $container[BrandProductDependencyProvider::FACADE_BRAND]
+            $container[BrandProductDependencyProvider::FACADE_BRAND],
         );
     }
 

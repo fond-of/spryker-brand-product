@@ -4,7 +4,6 @@ namespace FondOfSpryker\Zed\BrandProduct\Communication\Plugin\BrandExtension;
 
 use Codeception\Test\Unit;
 use FondOfSpryker\Zed\BrandProduct\Business\BrandProductFacade;
-use FondOfSpryker\Zed\BrandProduct\Business\BrandProductFacadeInterface;
 use Generated\Shared\Transfer\BrandTransfer;
 
 class ProductAbstractBrandPostSavePluginTest extends Unit

@@ -33,7 +33,7 @@ class BrandProductAbstractRelationReader implements BrandProductAbstractRelation
         $brandProductAbstractRelationTransfer->requireIdBrand();
 
         $productAbstractIds = $this->brandProductRepository->getRelatedProductAbstractIdsByIdBrand(
-            $brandProductAbstractRelationTransfer->getIdBrand()
+            $brandProductAbstractRelationTransfer->getIdBrand(),
         );
 
         $brandProductAbstractRelationTransfer->setProductAbstractIds($productAbstractIds);
@@ -52,7 +52,7 @@ class BrandProductAbstractRelationReader implements BrandProductAbstractRelation
         $productAbstractTransfer->requireIdProductAbstract();
 
         return $this->brandProductRepository->getBrandCollectionByAbstractIdProduct(
-            $productAbstractTransfer->getIdProductAbstract()
+            $productAbstractTransfer->getIdProductAbstract(),
         );
     }
 }
